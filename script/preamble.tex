@@ -1,0 +1,72 @@
+\usepackage{geometry}
+\geometry{a4paper, right=30mm, bottom=30mm, left=30mm, top=30mm}
+
+\usepackage{ifdraft}
+\usepackage{graphicx}
+\setkeys{Gin}{draft=false} % disable hiding graphics in draft mode
+\usepackage[table]{xcolor}
+\usepackage{multicol, multirow}
+\usepackage{amsmath, amssymb}
+\usepackage{cmap}
+
+\usepackage[obeyDraft]{todonotes}
+\usepackage{booktabs, siunitx}
+\usepackage[breaklinks=true]{hyperref}
+\usepackage[natbib=true]{biblatex}
+\usepackage{bibentry}
+\usepackage{doi}
+\definecolor{navyblue}{rgb}{0.0, 0.0, 0.5}
+%\definecolor{royalblue}{rgb}{0.06, 0.11, 0.42}
+\hypersetup{
+  final,
+  colorlinks=true,
+  urlcolor=navyblue,
+  citecolor=navyblue,
+  linkcolor=navyblue
+}
+\usepackage{cleveref}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+\usepackage{catoptions}
+% \input{Autoref.tex}
+\usepackage{textcomp}
+\usepackage{fancyhdr}
+
+\newcommand{\changefont}{%
+    \fontsize{10}{10}\selectfont
+}
+\fancyhf{}
+%\fancyhead[LE]{\slshape \rightmark} %section
+%\fancyhead[RE]{}
+%\fancyhead[RO]{\slshape \leftmark} % chapter
+%\fancyhead[LO]{}
+\fancyhead[LE,RO]{\changefont \slshape \nouppercase{\rightmark}} %section
+\fancyhead[RE,LO]{\changefont \slshape \nouppercase{\leftmark}} %chapter
+\fancyfoot[C]{\thepage} %footer
+\usepackage{datetime}
+\usepackage[automake,toc]{glossaries}
+\glsenablehyper
+\makeglossaries
+%\usepackage{comment}
+\usepackage{subcaption}
+\usepackage{tabularx, lscape, rotating}
+\usepackage[most]{tcolorbox}
+\newtcolorbox{myframe}[1][]{
+  enhanced,
+  top=12pt,bottom=12pt,left=16pt,right=16pt,
+  arc=0pt,
+  outer arc=0pt,
+  colback=white,
+  boxrule=1pt,
+  #1
+}
+
+%%%%%%%%%%%% EPIGRAPH
+\usepackage{epigraph}
+%\setlength{\beforeepigraphskip}{1.0\baselineskip}
+\setlength{\epigraphrule}{0pt}
+\setlength{\epigraphwidth}{.4\textwidth}
+%\setlength{\afterepigraphskip}{.25\baselineskip}
+\renewcommand{\textflush}{flushepinormal}
+
+
+\addbibresource{references.bib}

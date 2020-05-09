@@ -1,0 +1,59 @@
+% -*-latex-*-
+% NOTE:
+% These templates make an effort to conform to the Skoltech Thesis specifications,
+% however the specifications can change.  We recommend that you verify the
+% layout of your title page with your thesis advisor and the Education department 
+% before printing your final copy.
+\title{Geometric Deep Learning for Inverse Graphics}
+
+\author{Serge Kozlukov}
+\prevdegrees{B.S., Voronezh State University (2014-2018)}
+\department{Center for Computational and Data-Intensive Science and Engineering}
+
+\degree{Master's program in Statistical Learning Theory/Data Science}
+
+\degreemonth{June}
+\degreeyear{2020}
+\thesisdate{May 29, 2020}
+
+%% If for
+%% some reason you want to exactly specify the copyright notice text, you can
+%% use the \copyrightnoticetext command.  
+%\copyrightnoticetext{\copyright \@author \@degreeyear}
+
+\supervisor{Vladimir Spokoiny}{Professor}
+\supervisor{Dmitry Ulyanov}{Founder of in3D, PhD}
+
+% Department's Committee Chairman.
+\chairman{Maximv Fedorov? Maxim Panov?}{Professor}
+
+% Make the titlepage based on the above information.  If you need
+% something special and can't use the standard form, you can specify
+% the exact text of the titlepage yourself.  Put it in a titlepage
+% environment and leave blank lines where you want vertical space.
+% The spaces will be adjusted to fill the entire page.  The dotted
+% lines for the signatures are made with the \signature command.
+\maketitle
+
+% First copy: start a new page, and save the page number.
+\cleardoublepage
+% Uncomment the next line if you do NOT want a page number on your
+% abstract and acknowledgments pages.
+% \pagestyle{empty}
+\setcounter{savepage}{\thepage}
+\begin{abstractpage}
+\input{abstract}
+\end{abstractpage}
+
+
+\clearpage
+\input{publications}
+
+\cleardoublepage
+
+\begin{dedication}
+Dedicated to The Reader
+\end{dedication}
+
+\input{acknowledgements}
+
