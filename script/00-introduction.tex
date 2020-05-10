@@ -153,4 +153,70 @@ For me, however, it was first of all the time when we had to gather in teams to 
 on course projects. I and fellow students chose to reproduce results
 of~\citet{acceleratingNatgrad} and that was life-changing in two aspects: it
 began my long and fruitful collaboration with now-my-friend Max Kochurov, and I
-finally started learning Differential Geometry.
+finally started learning Differential Geometry. At that point we could barely
+decipher the math in the article, but we'd implement it nonetheless. On the project
+defence we received some important comments from Alexander Bernstein, but simply
+didn't know enough to regard his ``you should emphasize the \emph{ideology}
+of performing an update via exponential map'' as anything but abstract
+metaphor.  As my first advisor would probably describe it, we ``lacked the
+culture\footnote{I would always understand it as Lotman's semiotic
+``culture''}''.  Soon after natural gradients, we learned about something called
+``Hyperbolic Neural Networks''~\citep{ganeaHNNs} and associated ``Riemannian
+Adaptive Optimization Methods''~\citep{riemAdaptive} by Ganea and B\'ecigneul.
+TODO
+
+The next course was Lempitsky's ``Deep Learning'' and we had already decided on
+the project: we wanted to go beyond texts and sequences, to work with images.
+At about same time a fellow PhD student published a pre-print about
+``Hyperbolic Image Embeddings''. There were a number of points regarding this
+paper, that I really wanted to adress and couldn't. First, the paper claimed
+image datasets possess ``hidden hierarchical structures'' and used intuitive
+``is-instance-of'' examples as an argument. But what exactly does it mean in a
+general setting? To talk about curvature, we need the metric space structure.
+Thus to claim ``Imagenet has negative curvature'' we are obliged to first
+suggest a distance function with regard to which we could compute curvature
+upper bounds. Thinking about it, one should soon figure out, that it's not
+Imagenet itself that has negative curvature, it is \emph{data in conjunction
+with optimization problem} that should give rise to the distance function and
+in turn to curvature. The authors seem to partially fix this point with the new
+version of the pre-print, referring to the concept of \( \delta \)-hyperbolicity,
+but still omitting the question of ``what is curvature?''.
+The second point was the use of ``Einstein's midpoint''
+which as far as I could check did not coincide with Barycenter of uniform
+measure -- the minimizer of variance. Further, I failed to find any description
+of this ``midpoint'' as a minimizer or any objective function. That seemed like
+a worrisome fact: our entire framework is based on operating within specific
+metric manifold, but suddenly we use an averaging operation that doesn't in any
+way relate to the chosen metric? We'd need to either find a formula for the
+true Barycenter, or motivate the one already in use. Third major point was that
+the model essentially was a vanilla CNN with exponential map and hyperbolic
+distances at the end! So the concept was born, to really make \emph{hyperbolic}
+neural networks, in the fashion of Ganea and B\'ecigneul, only for images.
+It was Max's idea and I shall admit I wasn't particularly fond of it at the
+time, even though I'm rethinking it now, to make ``convolutional layers which
+would take in and spit out arrays of points on a manifold, instead of arrays of
+numbers''. The concept seemed incredibly naive and un-motivated, all of the
+many possible implementations -- totally arbitrary. We still went for it.  I
+saw infinite various interpretations meeting Max's description, but it turned
+out he meant something pretty specific and soon came up with a draft
+implementation which would take a ``window'' in spatial dimension, that is a
+contiguous sub-array of fixed number of manifold-points, represent them with
+tangent vectors at the origin of Poincar\'e ball, multiply by a matrix and take
+an average to produce a point in the output array. He would then experiment
+with more intricate expressions, adding quadratic terms, etc. None of this seemed
+to me motivated at all. I tried to modify the scheme by introducing relative
+directions (basically, replacing the logarithmic map from origin with
+logarithmic map from one of the points in the sub-array), but that didn't seem
+to help the issue. My real desire, however, was to come up with a motivated
+definition of convolutional layer. I knew convolutions had to do with harmonic analysis,
+but the only reference I heard of at that time were Hans Feichtinger's lectures
+on harmonic analysis and locally compact Abelian groups -- a rather dense
+reading that I just couldn't get through. If only I knew then that at that same
+time and for years already several gentlemen of recognized names in the
+Amsterdam Machine Learning were working on a curiosly similar problem of coming
+up with convolutional networks that can exploit certain kinds symmetries in
+data. In 2018, Taco Cohen presented ``Spherical CNNs'' that deal with signals
+defined on spheres and defined convolutional layers that appeal to abstract
+harmonic analysis. In this new light, the problem of representation learning
+could be re-stated as merely converting input data into a signal on space with
+chosen geometry.
