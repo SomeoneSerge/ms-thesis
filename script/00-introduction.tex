@@ -213,10 +213,34 @@ but the only reference I heard of at that time were Hans Feichtinger's lectures
 on harmonic analysis and locally compact Abelian groups -- a rather dense
 reading that I just couldn't get through. If only I knew then that at that same
 time and for years already several gentlemen of recognized names in the
-Amsterdam Machine Learning were working on a curiosly similar problem of coming
-up with convolutional networks that can exploit certain kinds symmetries in
-data. In 2018, Taco Cohen presented ``Spherical CNNs'' that deal with signals
-defined on spheres and defined convolutional layers that appeal to abstract
-harmonic analysis. In this new light, the problem of representation learning
-could be re-stated as merely converting input data into a signal on space with
-chosen geometry.
+Amsterdam Machine Learning were working on a different yet curiosly echoing
+problem of coming up with convolutional networks that can exploit certain kinds
+symmetries in data. In 2018, Taco Cohen presented ``Spherical CNNs'' that deal
+with signals defined on spheres and defined convolutional layers that appeal to
+abstract harmonic analysis. Their work clears up the thinking somewhat and
+makes it easier to understand how our ``convolutions'' were trying to exploit
+hyperbolicity in the wrong place: it was almost as if we were considering
+Mobius Transformations as the group of automorphisms acting on pictures!
+Doesn't quite add up! In this new light, in the problem of learning hyperbolic
+representations for Imagenet (which we're still interested in, because of
+relationships between classes and objects in the image) one could separate out
+the problem of first coverting input image into a ``signal on hyperbolic
+space'', which could then be transformed with real hyperbolic convolutions
+along appropriate dimensions. In our implementation the ``signal'' was merely a
+single point (or, later, fixed number of points) and convolution acted along
+spatial dimensions. TODO
+
+Back then, however, I only knew about Feichtinger. Our model seemed to give
+surprising results overfitting CIFAR with just about one hundred thousand
+parameters, but no kind regularization could help getting a generalizable
+model. We'd push until after NeurIPS deadline, then delve into month-long
+refactoring of Geoopt, and eventually give up. For me, that overlapped with yet
+another personal crisis, reinforced with almost failing Lempitsky's course by
+not meeting homework deadlines, and .
+I was seeking to re-start everything from a clear page. Recalling rather
+positive feelings towards Visual Effects industry that I experienced during my
+time at R3DS, I was looking for opportunities in 3D reconstruction. I seeked at
+many places, from Huawei, to Visionlabs, to numerous startups, until through
+Nikolai Chinaev and by mere chance I got in contact with Dmitry Ulyanov. TODO
+
+NeRF, DynamicFusion, etc. TODO
