@@ -1,0 +1,28 @@
+\chapter{Inverse Graphics}
+
+Here we shall finally discuss the application that motivates us most:
+reconstruction of photorealistic models of real-world scenes. To tackle the
+inverse problem we should first handle the forward. Thus we'll in very basic
+terms the process of image formation, models of light transport, different
+approaches to the solution. When that is done, we'll take a look at how the
+rendering process can be made differentiable. As inverse graphics is an
+extremely ill-posed problem with no single solution that we could arrive at
+with straightforward gradient descent, we should overview the ways we can
+incorporate our prior knowledge of the real world into the models to recover
+solutions that do make sense. That in part means exploring different model
+representations. We should review volumetric fusion which uses truncated signed
+distance function voxel grid. We should skim through its extensions to dynamic
+scene setup, both template-based and template-free. We briefly mention neural
+point-based graphics.  We should review neural blending models that learn to
+mix different pieces of source images to generate novel views which eventually
+lead to local light field fusion. We should also discuss how we could solve
+different subproblems independently, touching refinement of existing coarse
+mesh and volume models.  Then we must touch upon Neural Radiance Fields which
+bring volumetric fusion to the whole new level. It suggests to estimate the
+scene as if it were a density, through which ray gets casted through without
+refractions and reflections, accumulating the view direction-dependent color
+along the way.  Alexey Boyko described this as ``colored multipole fog''. The
+required underlying datastructure then is a differentiable parameterized
+black-box function that takes in a point and direction, and spits out
+absorbtion coefficient and color -- sounds like a good job for a neural
+network!  Finally, we should ask ourselves where we could go from here.
