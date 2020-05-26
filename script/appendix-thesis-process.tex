@@ -1,0 +1,335 @@
+\chapter{On the thesis process}
+
+\epigraph{"Then I was inspired,\\
+Now I'm sad and tired"
+}{``Gethsemane'', Andrew Lloyd Webber}
+
+\section*{For Whom and What?}
+
+What makes a good thesis? There are 127 members in the Telegram chat of
+"Skoltech Datascience 2018". After they've submitted their great theses,
+received feedback from their reviewers, successfully passed the defences and
+graduated -- how many people are to read their work then? As these 127 students
+are briliant, I dare assume they must've also published their results at top
+conferences such as NeurIPS, prior to finishing their degrees. Thus at the
+least, their work must be soon read and cited by fellow researchers in their
+respective fields.  That is at the \emph{very} least, until there's a new SOTA
+method and all prior approaches get discarded, which in such active and
+yet-un-shaped field as ``deep learning'' sometimes could happen even next
+winter. One more link that could lead future generations to the works being
+defended to-day is that these honourable soon-to-be-masters will surely proceed
+in their research, build on their current results something even more advanced.
+That should definitely live longer than until next conference.  That being
+said, many Masters will become Doctoral Students... yet I know in person those
+who have been exhausted enough by the state of racing, by frustration, and lack
+of determinism, which comprise a necessary part of research process, that they
+have already decided to leave Academia and go for the well-paid Industrial Job.
+The Job with local and concrete goals.  The Job with visible and tangible
+outcomes. The Job with predictable short-term rewards.  A friend of mine -- a
+most talented mathematician, far more able than me -- began his Doctoral
+studies, but changed his mind within just half a year and migrated to a
+different country to write frontend in JavaScript. Thus even the works
+introducing strong and novel results are at risk of dousing out. Mine Master's
+thesis is not a story of success. It doesn't introduce novel methods that beat
+state of the art scores. Instead, it's a story of failed attempts -- that, of
+course, does happen in research. Yet, how can such a work make an impact, when
+even stronger ones are oft so soon shadowed.
+What could make a thesis worth reading? Who is the reader I shall have in mind
+as I write this? I believe it's the one who struggles. I have read a number of
+seminal works over these two years, and the part I always enjoyed the most was
+either ``Acknowledgements'' or ``Preface''.  Rather frequently, ``Preface''
+contains a personal story behind people's work.  There I could see all the pain
+authors went through along their ways. The mistakes they made. And everything
+that kept them going!  Thus my idea is that I'm writing for someone who is
+desperately trying to deliver the tiny little message, the one who makes bad
+choices, the who in spite of failures and disapproval still means to keep
+walking the path and engaging. I'm writing for future me.
+
+Now that we've figured out \emph{whom} this writing is for, we should concern
+ourselves with the question of \emph{what}. What message could be of use to The
+Reader? What words could resonate with The Reader's heart and convince of
+actual relevance to His\footnote{I have tried for many years to use "they and
+them" as gender-neutral pronouns, yet I shall join~\cite{strictlyEnglish} in
+that it is ``an abominable and I want no part in it''.  However, instead of
+following the rule of ``masculine be taken to include feminine whenever
+necessary'' I would rather strip ``masculine'' of any identity and declare it
+the actual gender-less one, all throughout this thesis.} work?  At this point
+I'd want to mention a little about my background, which hasn't much to do
+directly with ``Data Science''. I did a Bachelor's degree in something called
+``Applied Mathematics'', specifically in the instance that mostly meant
+ordinary differential equations, optimal control, algorithms, and
+``programming''. My Bachelor's scientific advisor -- Anatoly Baskakov -- was
+however nothing like that! He would always proudly say ``I am and always have
+been a Pure Mathematician!''.  Although I come not even close to comprehending
+his ideas, I would best describe his main interest as ``linear functional
+analysis'', showing that one could treat things like PDEs or Harmonic Analysis
+in a much more convenient setting, such as Banach spaces and modules. He'd also
+say ``it is in a way naive, to tackle the Nonlinear, when there's still so much
+work to be done on the Linear''. I aspire one day to say I am a pure
+mathematician too.  But now to finish the joke, before my Bachelor's I could
+often reply to an arbitrary question with ``I wouldn't know, I'm a coder, not a
+mathematician".  Yes, I started out obsessed with technologies, frameworks, and
+``software design'', but unable to see connections to Mathematics. I arrived at
+the point of ``I'd rather not bother writing the code, I'm more of a
+mathematician''. What of relevance do these transitions imply about the author,
+you might ask?  \emph{First} implication is that which I did \emph{not} have
+when starting my MSc:  I didn't have any ``geometrical'' courses -- Metric and
+Differential Geometry are crucial to my Master's work --, didn't have proper
+Probability, Statistics, and Physics -- the core of ``Statistical Learning
+Theory'' --, never had time to write a raytracer or rasterizer -- and lack of
+familiarity with Computer Graphics community's conventions was a significant
+impediment to my work --, nor did I have much of ``Foundations of Mathematics''
+like Categories~\citep{categoriesWorking}, Logic, Types, Functional
+Programming, Theorem Provers~\citep{coq,lean}, and whatever is called ``Model
+Theory''~\citep{marker2006model} -- of huge importance on their own, these must
+soon prove instrumental in fixing the lamentous state of Array
+Programming~\citep{dexlang,mcdonellGPU} and managing Deep Learning
+pipelines~\citep{mokhov2018build}.  \emph{Second} implication was painful
+\emph{awareness} of my own lack of knowledge, and of the problems and
+inconsistenceis, that people in ``Applied Sciences'' -- in ``Deep Learning'' in
+particular -- tend to neglect and ignore.  For instance, a significant
+researcher in Bayesian methods nowadays might easily fail to describe what ``a
+derivative of a function\footnote{In the simple context of vector spaces} at a
+point'' actually is. It has been my belief that this lack of \emph{conceptual}
+understanding of underlying mathematical framework must be slowing down
+development of our field. As you dig down this rabbit hole, more and more
+questions pop up: the derivative at a point is a linear operator acting on
+``increment vectors'', the second derivative acts on the operators themselves,
+and so on, ``operators all the way down''. But the basic task of writing down
+Taylor series becomes increasingly cumbersome routine -- is there no other
+truth?!~\citep{elliott2018simple} What is a
+Tensor~\citep{bradley2020interface}? Is it just an array of numbers or is it a
+multilinear function? What's the fuzz with categories and universal property?
+Have they anything to do with geometry?  What is this talk about contra- and
+co-variance?  What are jets~\citep{betancourt2018geometric}?  Why on earth does
+Arnold~\citep{arnoldPDEs} denote basis vectors with \( \frac{\partial}{\partial
+x^i} \), as operators?  What is a
+\emph{convolution}~\citep{feichtingerFAHA,cohen2018general,e2cnn} and what are
+its defining properties? What is \emph{Hyperbolic Space}~\citep{ganeaHNNs}, and
+how do \emph{convolutions} work there? What is \emph{curvature}? What does it
+mean for \emph{data}~\citep{khrulkov} to have hidden underlying curved
+geometry? Suddenly, what are actual quantities in Kajiya's Rendering
+Equation~\citep{kajiya1986rendering} and how do they relate to Maxwell's? To
+more ground questions, how does one
+annotate~\citep{documentationResearch,struturingDocumentation,doctest,doctestRust,doctestCpp}
+and statically check array shapes~\citep{rush2019tensor,rush2019tensor2} in
+\texttt{NumPy} or \texttt{PyTorch}, and what has it got to do with
+\emph{Dependent Types} and could one get by without them~\citep{dexlang,slap}?
+How does one ensure
+reproducibility~\citep{inriaSacred,catalyst,pytorchLightning,xinLiangPipelines,},
+manage dependencies and packaging, handle CI/CD in the environment, where
+package sizes are measured in gigabytes, and job running times in days?  How
+does one even write tests in such eco-system?  These are just tiny fraction of
+the questions that would put me at an unease throughout my MSc. Questions of
+this kind are either unknown to or deemed uninimportant by an average working
+researcher in the ``Deep Learning''. I would imagine my Reader to be
+unsatisfied with such state of affairs. If I were to compress my message for
+you, Dear Reader, to bare minimum, it would be this: I am, too, trying to
+figure this all out.
+
+\section*{A condensed story of the last two years}
+
+The thesis you have at your hands, Dear Reader, has the title of ``Geometric
+Deep Learning for Inverse Graphics''. If my memory does not fail me, which it
+lately has been, it is the third version of my work's title. The frontpage also
+says, ``Supervised by Vladimir Spokoiny and Dmitry Ulyanov'', which is what I
+reported to Skoltech's Education Office earlier last Fall. That too has been
+constantly changing over the course of two years of Master's program.  In 2018,
+as I endeavoured to work right at the edge of my beloved Mathematics and this
+new ``AI'' field, I first started learning about optimal transportation theory.
+Optimal Transportation~\citep{villaniOldNew,ambrosioOTSummerSchool} is a
+beautiful mixture of what seems like pure math and geometry, but happens to
+have a tremendeous amount of connections to Physics and Statistics -- through
+partial differential equations, through probabilistic results, through games
+and operations research, through optimization theory, and much more! I
+connected with Thibaut Le Gouic, a Research Fellow at Higher School of
+Economics, widely known for his work on Barycentres in Wasserstein
+Spaces~\citep{le2017existence}. I started learning about Metric Geometry and
+curvature. This has something to do with the sum of angles in a triangle, rates
+of growth of volume, and existence of unique shortest paths between points -- I
+shall touch upon that a little later in the thesis, as it will turn out to be
+highly relevant to many other subjects. At about same time I was passing the
+Large Scale Optimization course by Yury Maximov. Students of Datascience-2018
+could tell many stories about the full month of sleepless nights, when we would
+only live to submit homeworks and kickstart ADMM~\citep{admmTweet,admmBoyd}.
+For me, however, it was first of all the time when we had to gather in teams to work
+on course projects. I and fellow students chose to reproduce results
+of~\citet{acceleratingNatgrad} and that was life-changing in two aspects: it
+began my long and fruitful collaboration with now-my-friend Max Kochurov, and I
+finally started learning Differential Geometry. At that point we could barely
+decipher the math in the article, but we'd implement it nonetheless. On the project
+defence we received some important comments from Alexander Bernstein, but simply
+didn't know enough to regard his ``you should emphasize the \emph{ideology}
+of performing an update via exponential map'' as anything but abstract
+metaphor.  As my first advisor would probably describe it, we ``lacked the
+culture\footnote{I would always understand it as Lotman's semiotic
+``culture''}''.  Soon after natural gradients, we learned about something called
+``Hyperbolic Neural Networks''~\citep{ganeaHNNs} and associated ``Riemannian
+Adaptive Optimization Methods''~\citep{riemAdaptive} by Ganea and B\'ecigneul.
+We reproduced the results of the paper for Burnaev's ``Machine Learning'' course,
+with the geoopt~\cite{geoopt} as a byproduct.
+
+The next course was Lempitsky's ``Deep Learning'' and we had already decided on
+the project: we wanted to go beyond texts and sequences, to work with images.
+At about same time a fellow PhD student published a pre-print about
+``Hyperbolic Image Embeddings''. There were a number of points regarding this
+paper, that I really wanted to adress and couldn't. First, the paper claimed
+image datasets possess ``hidden hierarchical structures'' and used intuitive
+``is-instance-of'' examples as an argument. But what exactly does it mean in a
+general setting? To talk about curvature, we need the metric space structure.
+Thus to claim ``Imagenet has negative curvature'' we are obliged to first
+suggest a distance function with regard to which we could compute curvature
+upper bounds. Thinking about it, one should soon figure out, that it's not
+Imagenet itself that has negative curvature, it is \emph{data in conjunction
+with optimization problem} that should give rise to the distance function and
+in turn to curvature. The authors seem to partially fix this point with the new
+version of the pre-print, referring to the concept of \( \delta \)-hyperbolicity,
+but still omitting the question of ``what is curvature?''.
+The second point was the use of ``Einstein's midpoint''
+which as far as I could check did not coincide with Barycenter of uniform
+measure -- the minimizer of variance. Further, I failed to find any description
+of this ``midpoint'' as a minimizer or any objective function. That seemed like
+a worrisome fact: our entire framework is based on operating within specific
+metric manifold, but suddenly we use an averaging operation that doesn't in any
+way relate to the chosen metric? We'd need to either find a formula for the
+true Barycenter, or motivate the one already in use. Third major point was that
+the model essentially was a vanilla CNN with exponential map and hyperbolic
+distances at the end! So the concept was born, to really make \emph{hyperbolic}
+neural networks, in the fashion of Ganea and B\'ecigneul, only for images.
+It was Max's idea and I shall admit I wasn't particularly fond of it at the
+time, even though I'm rethinking it now, to make ``convolutional layers which
+would take in and spit out arrays of points on a manifold, instead of arrays of
+numbers''. The concept seemed incredibly naive and un-motivated, all of the
+many possible implementations -- totally arbitrary. We still went for it.  I
+saw infinite various interpretations meeting Max's description, but it turned
+out he meant something pretty specific and soon came up with a draft
+implementation which would take a ``window'' in spatial dimension, that is a
+contiguous sub-array of fixed number of manifold-points, represent them with
+tangent vectors at the origin of Poincar\'e ball, multiply by a matrix and take
+an average to produce a point in the output array. He would then experiment
+with more intricate expressions, adding quadratic terms, etc. None of this seemed
+to me motivated at all. I tried to modify the scheme by introducing relative
+directions (basically, replacing the logarithmic map from origin with
+logarithmic map from one of the points in the sub-array), but that didn't seem
+to help the issue. My real desire, however, was to come up with a motivated
+definition of convolutional layer. I knew convolutions had to do with harmonic analysis,
+but the only reference I heard of at that time were Hans Feichtinger's lectures
+on harmonic analysis and locally compact Abelian groups -- a rather dense
+reading that I just couldn't get through. If only I knew then that at that same
+time and for years already several gentlemen of recognized names in the
+Amsterdam Machine Learning were working on a different yet curiosly echoing
+problem of coming up with convolutional networks that can exploit certain kinds
+symmetries in data. In 2018, Taco Cohen presented ``Spherical CNNs'' that deal
+with signals defined on spheres and defined convolutional layers that appeal to
+abstract harmonic analysis. Their work clears up the thinking somewhat and
+makes it easier to understand how our ``convolutions'' were trying to exploit
+hyperbolicity in the wrong place: it was almost as if we were considering
+Mobius Transformations as the group of automorphisms acting on pictures!
+Doesn't quite add up! In this new light, in the problem of learning hyperbolic
+representations for Imagenet (which we're still interested in, because of
+relationships between classes and objects in the image) one could separate out
+the problem of first coverting input image into a ``signal on hyperbolic
+space'', which could then be transformed with real hyperbolic convolutions
+along appropriate dimensions. In our implementation the ``signal'' was merely a
+single point (or, later, fixed number of points) and convolution acted along
+spatial dimensions.
+Back then, however, I only knew about Feichtinger. Our model seemed to give
+surprising results overfitting CIFAR with just about one hundred thousand
+parameters, but no kind regularization could help getting a generalizable
+model. We'd push until after NeurIPS deadline, then delve into month-long
+refactoring of Geoopt, and eventually give up. For me, that overlapped with yet
+another personal crisis, reinforced with almost failing Lempitsky's course by
+not meeting homework deadlines. The last straw was that at university I was
+still supposed to report results on stability of barycentres -- which I had
+barely touched. I spent a couple weeks catching up on that, regularly meeting
+with Thibaut, somehow submitted the report, but I couldn't seem to get
+hyperbolic deep learning out of my head. One positive change of that time was
+progress in studying differential geometry. From Thibaut, I've learned about an
+absolutely \emph{amazing} course read by Frederic Schuller, called ``Gravity
+and Light''~\citep{gravityLight}.  Later I would discover another course of
+his, the ``Geometric Anatomy of Theoretical
+Physics''~\citep{geometricAnatomy}. I would spend many nights watching and
+re-watching these lectures.
+Still, I was seeking to re-start everything from a clear page. Recalling rather
+positive feelings towards Visual Effects industry that I experienced during my
+time at R3DS, I was looking for opportunities in 3D reconstruction. I seeked at
+many places, from Huawei, to Visionlabs, to numerous startups, until through
+Nikolai Chinaev and by mere chance I got in contact with Dmitry Ulyanov.  That
+acquiatance led me eventual obsession with differentiable rendering, and
+reinforced curiosity about inverse graphics. Since then the integration test,
+the final challenge I would always have in the back of my mind, was
+reconstruction photorealistic human models from a mobile phone-recorded (RGBD)
+video of a moving human, featuring complicated lighting, non-rigid
+deformations, changes in topology, and a tremendous quantity of noise.
+
+Closer to the end of my master's I've learned about equivariant and
+gauge-equivariant neural networks which turned out to relate a huge lot to our
+work on hyperbolic convolutions. The Last source of inspiration was
+NeRF~\cite{nerf} on which I've spent two last weeks of April.
+
+\section*{On the concept of thesis}
+
+We shall step aside for a minute to mention that there seems to exist a number
+of incosistencies generated by the very idea of finishing a degree with thesis.
+For example, on my interview during admission to Skoltech, I've been asked if
+I'm ready to work in a team and that Master's degree is a collaborative
+process. Working with other people is really hard. Especially that working with
+people was largely new to me. Yet I have tried. In fact, I tried so hard, I
+spent almost all of my time on collaborative projects. It didn't immediately
+occur to me, that one cannot write a \emph{thesis} out of collaborative
+projects, and that only personal contributions matter.
+\textbf{The process of \emph{thesis} diminishes the value of collaborative work}.
+Please refer also to~\citet{phdBullshit}.
+
+Further, I finished my Bachelor's relatively easy: I had two peer-reviewed
+articles, which I have simply concatenated and endowed with a fancy title page.
+However, research is associated with risk and uncertainty, thus by the end of
+the degree there just might not be any positive results
+Writing and defending a thesis about a failure is orders of magnitude harder.
+Conversely, a successful thesis on its own doesn't yet mean a meaningful
+research has been made.
+
+Finally on choice of subject and on supervision. During my Master's, I've
+changed thesis subject four times.  I had two supervisors, and discussed
+supervision with three more people. The last five months I, and it is of course
+totally my fault, have been working without supervision at all, without a ready
+option to consult or get feedback... There's a number of points to make
+regarding uncertainty, regarding centralization, and Raymond's ``cathedral and
+bazaar'', etc. I shall only say that I could've spent more time on work if I
+hadn't had to worry about finding and reporting a supervisor before a
+yet-another deadline.
+
+\section*{On disciplines}
+
+A final reflection concerns what I call ``disciplines''.  I'm more than fond of
+\citet{c2wiki}. I must've rewatched Robert Martin's ``The Land that Scrum
+Forgot''~\cite{unclebobScrum} dozens of times, as well
+as~\citet{unclebobProfessionalism,unclebobFuture,unclebobPrinciples,unclebobFunctional,unclebobCoplienTDD,unclebobTDD,unclebobHowNotToLie}
+which all communicate the same spirit. I'd like to say I \emph{knew}
+that it's scary to tell people fair time estimates,
+that overestimating is better than telling a lie~\cite{unclebobHowNotToLie},
+that lies and failed estimates create and deepen the mistrust between a
+developer and his manager, that the trust has to be built, that it is the job
+of the developer to know and decide that continuous refactoring and thorough
+testing are necessary, and to persuade his manager in that necessity, that it's
+perfectly fine to not understand things and ask questions, that people are in general
+bad and slow at thinking and this is why we need type systems and functional programming,
+why we need run-in-no-time automated testing, and why we need TDD and Pair Programming
+to actually \emph{slow down} to the point where we actually understand things things
+and understand each other. I'd like to say I \emph{knew} it. However to know something
+means at very least: to have a justified belief, that is justified for the
+right reason.  At the end, I didn't \emph{know}, I \emph{had a belief} and sure
+justified (with all the references at hand). My justification wasn't complete
+and I easily conclude so because over these two years I've failed all of the
+mentioned (and un-mentioned) bullets. I've failed to communicate, I've failed
+the estimates, I've failed assumptions about other people's assumptions.
+
+Disciplines and communication are something we don't discuss in Master's
+courses, yet they are far more important than Innovation and Leadership.
+Disciplines and communication aren't something we \emph{can} learn in courses.
+Disciplines and communication are something most of us -- developers and
+researchers -- are particularly \emph{bad} at.  What is required to learn
+disciplines and communication, is actual \emph{exposure} and this is something
+universities \emph{could} help with\footnote{In fact, while innovation-related courses
+were all non-sense and lacked in content, they actually were good at exposing people
+to communication}.

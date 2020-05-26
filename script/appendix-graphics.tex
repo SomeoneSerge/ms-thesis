@@ -1,28 +1,102 @@
-\chapter{Inverse Graphics}
+\chapter{Inverse Graphics} \label{appendix:graphics}
 
-Here we shall finally discuss the application that motivates us most:
-reconstruction of photorealistic models of real-world scenes. To tackle the
-inverse problem we should first handle the forward. Thus we'll in very basic
-terms the process of image formation, models of light transport, different
-approaches to the solution. When that is done, we'll take a look at how the
-rendering process can be made differentiable. As inverse graphics is an
-extremely ill-posed problem with no single solution that we could arrive at
-with straightforward gradient descent, we should overview the ways we can
-incorporate our prior knowledge of the real world into the models to recover
-solutions that do make sense. That in part means exploring different model
-representations. We should review volumetric fusion which uses truncated signed
-distance function voxel grid. We should skim through its extensions to dynamic
-scene setup, both template-based and template-free. We briefly mention neural
-point-based graphics.  We should review neural blending models that learn to
-mix different pieces of source images to generate novel views which eventually
-lead to local light field fusion. We should also discuss how we could solve
-different subproblems independently, touching refinement of existing coarse
-mesh and volume models.  Then we must touch upon Neural Radiance Fields which
-bring volumetric fusion to the whole new level. It suggests to estimate the
-scene as if it were a density, through which ray gets casted through without
-refractions and reflections, accumulating the view direction-dependent color
-along the way.  Alexey Boyko described this as ``colored multipole fog''. The
-required underlying datastructure then is a differentiable parameterized
-black-box function that takes in a point and direction, and spits out
-absorbtion coefficient and color -- sounds like a good job for a neural
-network!  Finally, we should ask ourselves where we could go from here.
+Much of our work, while often purely geometric and abstract, is motivated by
+the problem of reconstructing photorealistic models of real-world scenes.
+There's no way we can give a thorough and self-contained treatise of the subject
+here. We shall, however, outline some of the important directions.
+
+It would be a naive endeavour to tackle the inverse problem without handling
+the forward one. As we are talking about photorealistic imaging, some of the
+questions to be concerned with is: what even to measure?  A good overview is
+Naty Hoffman's SIGGRAPH tutorial~\cite{natyHoffmanPBS}. After introduction of a
+reasonable approximation of Maxwell's law -- the Kajiya's ``Rendering
+Equation''~\cite{kajiya1986rendering} -- the next problem is to find the
+solutions to a Boltzmann-type integral equation.
+The classic approach, taken by~\cite{kajiya1986rendering},
+is to use Monte-Carlo methods, which gives rise to variety of raytracing algorithms.
+Another common approach is the finite element method, for an overview of which
+one could probabily refer to~\cite{lehtinen2004foundations}. Less common in
+graphics community, but possibly still interesting alternative is also the boundary element
+method~\cite{zhang2013fast}.
+
+A subject of its own are models of light interaction -- the \( \rho \) function
+appearing in Kajiya's equation. Related links and informal descriptions
+can be found
+in~\cite{hackmdRendering,hackmd3d,hackmdBeyondLambert,hackmdBlinn,hackmdDRM,hackmdTorranceSparrow,hackmdPhong}.
+
+With this perspective, the physically-based rendering is naturally
+differentiable (at least in the weak sense). \citet{tzuMaoEdgesampling} propose
+direct differentiation of edge raytracing procedure by treating the interior
+and the boundary of a rendered triangle individually and noting that for the
+former one needs to simply differentiate the integrand, and the latter appears
+in the form of uniform measures concentrated on the edges (kind of similar to
+``delta-functions'') and can be handled by sampling edges explicitly.
+Also of interest is Tzu Mao Li's thesis~\cite{tzuMaoThesis}.
+\citet{mitsuba2,mitsuba2Math} take on different approach and suggest to
+reparameterize the integral so that discontinuities disappear.
+
+As inverse graphics is an extremely ill-posed problem with no single solution
+that we could arrive at with straightforward gradient descent, we means of
+incorporating our prior knowledge of the real world into the models to recover
+solutions that do actually make sense. Specifically, we may want to pose
+optimization problem that doesn't actually compare the physically-based render
+of the scene against the reference: because e.g. occlusions could trap
+reconstructed model in a local minimum. There are different approaches to
+differentiable rendering, including \citet{softras,dibR} and many more.
+One could also consult a reasonable collection~\cite{kaolin}
+
+Recently has emerged the neural point-based graphics:~\citet{npbg}.
+See~\citet{neuralRenderingOverview} for overivew of neural methods.
+
+On another side of the spectrum are classic methods. First, for dealing with
+geometry in presense of depthmaps, there's an family of methods inspired by
+volumetric fusion of~\citet{sdfFusion}. The method allows to ``integrate''
+multiple partial and noisy observations of the same surface into a single
+model.  Model also has a reasonable Bayesian interpretation.
+\citet{kinectfusion} further introduce the real-time KinectFusion algorithm
+(and are, to our limited knowledge, first to use TSDF instead of SDF).
+\citet{dynamicfusion} generalizes the method to dynamic setup
+where the surface may be subject to non-rigid deformations over time.
+They handle the problem by computing a motion field at each time frame
+which ``reverses'' the deformation, restoring a ``canonical'' pose
+of the object. In canonical pose the observations can be integrated using
+the classical algorithm, and then integrated models can be put into
+any given frame's pose using the same motion field.
+Discussed so far are template-free methods that deal with arbitrarily deforming
+surfaces. For certain tasks even more informative prior is required.
+Thus, \citet{doublefusion}, dealing with human performances, propose to combine
+template-based models (e.g.~\citet{smpl,softsmpl}) and dynamic volumetric
+fusion.
+
+Given a reconstructed coarse geometry (whether produced by volumetric fusion or
+otherwise), one could use lighting information to restore finer details, e.g.
+using photometric methods~\citet{flashmob}. Just thus~\citet{shadingRefinedSDF}
+use shading information to refine volumetric models.
+
+A curious development of volumetric fusion is the Neural Radiance Fields
+by~\citet{nerf}. It sort of suggests to integrate light's interaction with the
+scene, rather than depthmaps.  Specifically, it suggests to estimate the scene
+as if it were a dense colored fog, through which a casted ray passes without
+refractions and reflections, accumulating (or rather, losing) the view
+direction-dependent color along the way. A colleague of mine, Alexey Boyko has
+well described this as ``colored multipole fog''. The required underlying
+datastructure then is a differentiable parameterized black-box function that
+takes in a point and direction, and spits out absorbtion coefficient plus color
+-- a task for a neural network!
+There's a number of ways one could proceed with NeRF. One could seek to improve
+its performance, e.g. by using a different blackbox, like a tensor train.  On
+the other hand, just as TSDF-Fusion develops into DynamicFusion, one could try
+to add a temporal dimension to NeRF (must be a decent exercise in Neurobayesian
+methods).
+
+The discussed methods in fact rely on more low-level machinery. For instance,
+structure from motion, or efficient template fitting, all rely on extraction of
+points of interest~\cite{r2d2} from different images of the same surface, and
+the following synchronization of correspondences~\cite{birdalCorrespondences}.
+Such tasks could potentially benefit from introduction of \emph{hyperbolic}
+descriptors -- but we're yet to explore this direction. Aside from that, we
+note that~\citet{birdalCorrespondences} relies on Riemannian optimization:
+the model is implemented in geoopt~\cite{geoopt}.
+
+One question which we hadn't time to touch upon and leave for the future is
+that of software design (as in: architecture) for graphics.

@@ -1,12 +1,195 @@
-\chapter{Hyperbolic Neural Networks}
+\chapter{Hyperbolic representations}\label{appendix:hyperbolics}
 
-Every single work on ``hyperbolic deep learning'' starts with a definition of
-Riemannian manifold and motivating words about curvature and hierachies. If one
-looks closer, however, he\footnote{Remember, ``he'' is gender-less in this
-manuscript} just might notice that definition of manifold is never used, that
-curvature is never defined, and that novel layers are defined in terms of
-``gyrovector additions'' and ``Einstein midpoints''. What is their position as
-relative to the significant framework of differential geometry that we had to
-build to just read the abstract? Goal of this appendix is to summarize
-different related works specific to hyperbolic geometry in a way consistent
-with the rest of framework.
+What is the position of Gyrovector formalism, Einstein midpoints, and, often
+set-free, hyperbolic geometry as relative to the framework of differential
+geometry?
+
+We first introduce the Hyperbolic space as the upper sheet of a hyperboloid in
+Minkowski space. Then we show how the upper-sheet can be projected into
+Poincar\'e ball model (with inherited metric) and further to upper-halfspace.
+Until this point, we only discuss underlying sets and local differential
+properties, such as local metric. To evaluate synthetic properties of the
+Hyperbolic space, e.g. to compute distances between points, we then switch
+between the available models arbitrarily -- they are isometric by construction,
+while different tasks are easier accomplished in different models.
+
+\section*{Hyperboloid and Poincar\'e disk models}
+
+It seems to be a reasonably motivated to introduce a hyperbolic metric by
+starting with the Hyperboloid model. For instance, we'll take on intuition
+of~\cite{thurstonThree} and set out to construct a ``sphere'' of constant
+negative curvature \( \frac{1}{r^2} = -1 \), i.e. ``of imaginary radius \( r=i
+\)''.
+
+Consider the Lorentz (Minkowski) space -- the \( (\mathbb{R}^{n+1}, Q) \),
+consisting of points \( (x_1, \ldots, x_n, t) \) (conveniently denoted \( (x,
+t) \)), endowed with a non-degenrate symmetric bilinear form
+\[ Q((x, t), (x', t')) = \sum_{k=1}^n x_k x_k' - tt', \]
+and corresponding pseudo-Riemannian metric \[ g_H = \operatorname{d}\mathrm{x}_1^2 +
+\cdots + \operatorname{d}\mathrm{x}_n^2 - \operatorname{d}\mathrm{t}^2, \]
+where \( \operatorname{d}\mathrm{x}_j \) is the chart-induced basis covector, as
+introduced in previous appendix (we use straight characters \( \mathrm{x}_i \),
+as opposed to \( x_i \) to denote the chart component \emph{functions}; in this
+case chart is the identity and chart components are projections).
+
+The underlying set of our model space is the upper sheet of the \(n\)-dimensional
+Hyperboloid:
+
+\begin{align*}
+H &= \left\{ (x, t) \in \mathbb{R}^{n+1} \left| Q((x,t), (x,t)) = -1,~ t>0 \right.\right\}\\
+&= \left\{ (x, t) \in \mathbb{R}^{n+1} \left| \sum_{k=1}^n x_k^2 - t^2 = -1,~t>0 \right.\right\}.
+\end{align*}
+
+The upper-sheet is a metric manifold, with global chart \( x \mapsto (x,
+\sqrt{1 + \|x\|_2^2}) \), and metric induced from ambient Minkowski space. This
+pull-back metric is a Riemannian (positive-definite) metric. However, instead
+of investigating this metric on the Hyperboloid, we will straight away consider
+the Stereographic projection that maps upper-sheet onto the \emph{Poincar\'e
+ball} \[ \mathcal{P} = \{ p\in\mathbb{R}^n\left|~\|p\|_2^2 \leq 1\right.\}. \]
+This map is realized as follows: a point \( (x, t) \) on the upper-sheet is
+projected onto the horizontal plane \( \{ (y, 0) \left| y\in
+\mathbb{R}^{n}\right. \} \) with the center of projection at the vertex of the
+lower-sheet, i.e. \( (0, -1) \). One can easily derive that the projection is \(
+(x, t) \mapsto \frac{1}{1+t}x: H\to\mathcal{P} \), and has the inverse \(
+\phi:\mathcal{P}\to H, \) \[ \phi(p) = (\frac{2p}{1 -
+\|p\|_2^2},~\frac{1+\|p\|_2^2}{1-\|p\|_2^2}). \]
+
+The Poincar\'e ball has a very natural global chart -- the identity map \(
+\mathrm{p}=p\mapsto p \), which induces a convenient basis of partial
+derivatives,
+\( \operatorname{id}_*\partial_i\simeq\partial_i,~i=\overline{1,n}, \) in the
+tangent bundle \( \mathcal{T}\mathcal{P} \). The projection inverse \( \phi \)
+allows to pull-back the Minkowski metric inherited by upper-sheet onto
+Poincar\'e disk: \[ (\operatorname{id}_{H\to(\mathbb{R}^{n+1},g_H)}\circ
+\phi)^* g_H = \phi^*g_H. \]
+It's useful to describe this metric in chart-induced
+coordinates. Specifically, we need to compute
+\[ g_H(\phi_* \partial_i,~\phi_* \partial_j). \]
+
+A tangent vector \( \phi_*\partial_i \in \mathcal{T}\mathbb{R}^{n+1} \) is
+naturally described by its action on a scalar function \(
+f:\mathbb{R}^{n+1}\to\mathbb{R} \), so
+\begin{align*}
+(\phi_* \left.\partial_i\right|_p)f &= \left.\partial_i\right|_p(f\circ \phi)\\
+&= \sum_{k=1}^{n+1} (\left.\partial_k\right|_{\phi(p)} f) (\left.\partial_i\right|_p \phi_k)\\
+&= \left(\sum_{k=1}^{n+1} (\partial_i \phi_k)(p) \cdot
+\left.\partial_k\right|_{\phi(p)}\right) f,
+\end{align*}
+where we, slightly abusing notation, treat partial derivatives as
+``polymorphic'', so that the ``type'' of each instance is inferred from types
+of their arguments (\( f \) or \( \phi_k \)).
+Further, the coefficients of basis vectors
+\begin{align*}
+(\partial_i\phi_k)(p)
+&= \frac{2p_i}{(1-\|p\|_2^2)^2} \sum_{k=1}^{n+1} 2p_k \partial_k
++ \frac{2}{1 - \|p\|_2^2} \partial_i
++ \frac{2p_i}{1 - \|p\|_2^2} \left( \frac{1+\|p\|_2^2}{1-\|p\|_2^2} + 1\right) \partial_{n+1}\\
+&= \frac{4p_i}{(1-\|p\|_2^2)^2} (\partial_{n+1} + \sum_{k=1}^{n+1} p_k \partial_k)
++ \frac{2}{1-\|p\|_2^2}\partial_i.
+\end{align*}
+
+Now we can compute the coefficients of the metric tensor.
+First, for \( i\neq j \):
+\begin{align*}
+g_H(\phi_*\partial_i, \phi_*\partial_j)
+= &~\frac{4p_i 4p_j}{(1 - \|p\|_2^2)^4}
+     g_H(\partial_{n+1} + \sum_{k=1}^n p_k \partial_k,~
+         \partial_{n+1} + \sum_{k=1}^n p_k \partial_k) \\
+  &~+ \frac{4}{(1-\|p\|_2^2)^2} g_H(\partial_i,~\partial_j) \\
+  &~+ \frac{8p_i}{(1 - \|p\|_2^2)^3} g_H(\partial_{n+1} + \sum_{k}\partial_k,~\partial_j) \\
+  &~+ \frac{8p_j}{(1 - \|p\|_2^2)^3} g_H(\partial_i,~\partial_{n+1} + \sum_{k}\partial_k) \\
+= &~(16p_ip_j)\frac{-1 + \|p\|_2^2}{(1 - \|p\|_2^2)^4} \\
+  &~+ 0 \\
+  &~+ \frac{8p_i}{(1 - \|p\|_2^2)^3} g_H(p_j \partial_j,~\partial_j) \\
+  &~+ \frac{8p_j}{(1 - \|p\|_2^2)^3} g_H(\partial_j,~p_i \partial_i) \\
+= &~0.
+\end{align*}
+
+Finally,
+\begin{align*}
+g_H(\phi_*\partial_i,~\phi_*\partial_i)
+= &~\frac{-16 p_i^2}{(1 - \|p\|_2^2)^3} 
+  + \frac{4}{(1-\|p\|_2^2)^2} 
+  + \frac{16p_i^2}{(1 - \|p\|_2^2)^3} \\
+= &~\frac{4}{(1 - \|p\|_2^2)^2}.
+\end{align*}
+
+Thus
+\[ \left.\phi^*\right|_p g_H = \frac{4}{(1 - \|p\|_2^2)^2} \operatorname{d}\mathrm{p}^2. \]
+
+This is the Poincar\'e metric usually given in papers just by formula, only now
+we've made sure that this metric is \emph{indeed} the pullback of Hyperboloid's
+metric under the central projection, and the two models of hyperbolic geometry
+are isometric by-construction. This metric is conformal (preserves angles), as
+it's a multiple of the ambient Euclidean local metric \( \operatorname{d}\mathrm{p}^2
+\).
+
+\section*{Poincar\'e upper halfplane}
+
+Obtained from the Ball via inversion in a sphere.
+
+Results in underlying set \( \{ x\in\mathbb{R}^n \left|~x_n > 0\right.\} \)
+and the pull-back metric \( \frac{1}{x_n^2} \operatorname{d}\mathrm{x} \).
+
+Distance of a vertical segment can be easily integrated...
+
+Geodesic between points on the same vertical line is exactly the vertical line segment...
+
+M\"obius transformations are isometries...
+
+One can move any two points onto same vertical line via M\"obius transformation
+and then compute the distance...
+
+Stereographic projection is also a simple M\"obius transformation, specifically
+an inverison in a sphere (plus throwing away a coordinate)...
+
+\section*{Other models}
+
+A different projection could give the Klein model where geodesics are straight
+Euclidean lines. Another interesting projection is the Band model which allows
+to make a chosen curve appear as a straight line. Very motivating overviews
+are~\citet{bulatovConformal} and everything related to the amazing
+\texttt{HyperRogue}~\cite{hyperrogue} project.
+
+\section*{Group of isometries of hyperbolic plane}
+
+We've already mentioned the M\"obius (Lie) group...
+Please refer to~\cite{beardonGeometryDiscrete,hubbardTeichmuller}
+
+\section*{Tilings}
+
+As \citet{yaSaTilingBased} demonstrated, tilings and discrete groups acting on
+Hyperbolic spaces are of utmost importance. An entry point is~\citet{gromov}.
+
+
+\section*{Harmonic analysis}
+
+For our further work on ``hyperbolic convolutions'' familiarity with harmonic
+analysis and gauge theory is required. \nameref{sec:history} provides
+a number of relevant links.
+\citet{stollharmonic} discusses PDEs on real Hyperbolic space, and e.g.
+describes solutions to Laplace equation (the spherical harmonics).
+
+\section*{Barycentres vs Einstein midpoints}
+
+Averaging in metric spaces relates to the notion of a barycentre of a measure:
+a point \( b \) of a metric space \( (M, \rho) \) is a barycentre of a measure
+\( \mu \) if it minimizes the variance functional
+\[ b \mapsto \int \rho(b, \cdot)^2\operatorname{d}\mu. \]
+
+An average or mean of \( n \) points, say \( p_1, \ldots, p_n \), is a
+barycentre of the uniform measure concentrated on those points, i.e. barycentre
+of \( \frac1n\sum_{i=1}^n \delta_{p_i} \).
+
+The Einstein's midpoint, used e.g. in~\cite{khrulkov} is not
+the\footnote{``the'', as in negatively-curved spaces barycentres are unique}
+variance minimizer for Hyperbolic space. Instead, ``Einstein's midpoint'', or
+Einstein's \emph{average} of relativistic velocities \( v_1, \ldots, v_n \)
+(relative to a chosen rest frame) of particles with invariant masses \( m_1,
+\ldots, m_n \), is the velocity of the center of momentum frame of
+this system. To give sense of what functional ``midpoint'' minimizes, the
+center of momentum-frame is the frame in which total energy of the system is
+minimized, or, equivalently, one in which perceived total momentum vanishes.
+
+\citet{diffThroughFrechet} propose a differentiable iterative algorithm
+that computes the true mean. See also \citet{gdFrechetHyperbolic}.
