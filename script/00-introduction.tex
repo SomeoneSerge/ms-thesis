@@ -7,7 +7,7 @@
     }{Pink Floyd, "The Wall"}
 }
 
-\section*{Foreword}
+\section*{Informal foreword}
 
 Until the very last moment, this thesis has been more of an enumeration of
 pieces of ideas and experiments, than a single purposeful story. In faith, I've
@@ -38,7 +38,31 @@ but over the group $(\mathbb{R}^n,0,+,-)$ of translations acting on
 $\operatorname{dom}f$ -- it is not $\operatorname{dom}f$ that matters if we
 want to achieve equivariance, it is the group!
 
-\section*{Structure of the thesis}
+The work begins with acquiatance with recently emerged field of hyperbolic deep
+learning and very simple idea that in fact in \emph{any} task, not just graphs
+and language modeling, the existing models can be underperforming because they
+are not accounting for \emph{curvature}, and that perhaps there could be a
+generic method of improving models by introducing curvature explicitly.  One
+relatively general method that seems to be reliably improving performance is
+just fusing a classic ``Euclidean'' neural network with a ``hyperbolic head''
+-- formulating distance-base decision rule and measuring hyperbolic distances
+between embeddings. This method is limited in that one can only get a constant
+``boost'' once and cannot keep further improving performance by introducing
+more complexiity -- ``stacking more layers''. A naive attempt to construct such
+stack-able layers has met a number of obstructions. and here comes the summary
+of my work: I'm trying to find a mathematical Framework of \emph{what} we were
+implicitly trying to do in our naive implementations. There must be a
+\emph{type mismatch} in our naive model and inferring explicit types would
+allow to find it and reason about available cures. It is very likely that such
+a Framework should be an already existing thing, that I'm simply not familiar
+with. Thus I'm trying to find parallels e.g. in Pennec's Riemannian
+generalizations of principal component analysis, and in Harmonic analysis
+(convolutions).  Later I learn about Cohen and Welling's works on equivariant
+models and find many similarities to our problems.
+
+Below is the report on this journey.
+
+\section*{Formatl introduction}
 
 In this thesis we\footnote{
 Using plural pronouns in single-author manuscripts is a curious tradition that,
