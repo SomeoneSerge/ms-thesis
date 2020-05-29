@@ -7,6 +7,39 @@
     }{Pink Floyd, "The Wall"}
 }
 
+\section*{Foreword}
+
+Until the very last moment, this thesis has been more of an enumeration of
+pieces of ideas and experiments, than a single purposeful story. In faith, I've
+come to have forgotten what motivated me to choose the subject I chose.  Only
+now, the night before submission deadline, I started \emph{remembering}
+portions of what I actually hoped to communicate. The common theme across the
+thesis the approach of solving problems and discovering things by pointing out
+inconsistent \emph{types}\footnote{Actually the onle math I've learned so far
+is internalized in category of sets, but it's still illuminating to talk about
+types even without defining them}. To see what I mean, consider (well-known)
+examples that motivated me: the key to generalizing derivatives from real
+functions to functions on arbitrary (even infinite-dimensional) linear spaces
+is to note that derivative is in fact an \emph{operator} that acts on
+increments in the input; the key to generalizing derivatives to manifolds
+without vector structure is to note that the ``increments'' do not come from
+original space, but actually are vectors in the tangent space; the key to
+generalizing gradient descent algorithm to manifolds is to note that derivative
+of an objective function $\mathbb{R}^n \to \mathbb{R}$ is a \emph{row}-vector
+i.e. a linear functional that needs to be converted into an increment vector
+with transpostion, implicitly applying Riesz representation theorem; the key to
+generalizing expontial function to manifolds is to note that in equation
+$\dot{x} = x$ the function $x$ is from tangent space to manifold, and that
+derivative is in fact the covariant derivative (the linear connection) and not
+the pushforward; the key to generalizing convolutions to other domains and
+symmetries, is to observe that integation in $\int_{\mathbb{R}^n}
+f(y)h(x-y)\operatorname{d}y$ is not over $\operatorname{dom}f=\mathbb{R}^n$,
+but over the group $(\mathbb{R}^n,0,+,-)$ of translations acting on
+$\operatorname{dom}f$ -- it is not $\operatorname{dom}f$ that matters if we
+want to achieve equivariance, it is the group!
+
+\section*{Structure of the thesis}
+
 In this thesis we\footnote{
 Using plural pronouns in single-author manuscripts is a curious tradition that,
 aside from all, allows the narrator to sound less pretentios, as if speaking
