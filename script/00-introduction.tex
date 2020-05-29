@@ -15,21 +15,29 @@ come to have forgotten what motivated me to choose the subject I chose.  Only
 now, the night before submission deadline, I started \emph{remembering}
 portions of what I actually hoped to communicate. The common theme across the
 thesis the approach of solving problems and discovering things by pointing out
-inconsistent \emph{types}\footnote{Actually the onle math I've learned so far
-is internalized in category of sets, but it's still illuminating to talk about
-types even without defining them}. To see what I mean, consider (well-known)
-examples that motivated me: the key to generalizing derivatives from real
-functions to functions on arbitrary (even infinite-dimensional) linear spaces
-is to note that derivative is in fact an \emph{operator} that acts on
-increments in the input; the key to generalizing derivatives to manifolds
-without vector structure is to note that the ``increments'' do not come from
-original space, but actually are vectors in the tangent space; the key to
-generalizing gradient descent algorithm to manifolds is to note that derivative
-of an objective function $\mathbb{R}^n \to \mathbb{R}$ is a \emph{row}-vector
-i.e. a linear functional that needs to be converted into an increment vector
-with transpostion, implicitly applying Riesz representation theorem; the key to
-generalizing expontial function to manifolds is to note that in equation
-$\dot{x} = x$ the function $x$ is from tangent space to manifold, and that
+the \emph{types}\footnote{Actually the only math I've learned so far is
+internalized in the category of sets, but it's still illuminating to talk about
+types even without defining them} of objects one operates with. To see what I
+mean, consider (well-known) examples that motivated me: they key to Fourier's
+breakthroughs~(e.g. introduction to~\cite{explorationsHarmonic}) was to
+overcome the paradigm shift of realizing that functions arising as solutions to
+his equations aren't described by \emph{formulas}, but by assigning a value to
+each point in some domain set, eventually turning the ``intuitive'' notion of a
+function into an almost tangible object -- an anything-goes subset of the
+Cartesian product of the domain and the range, respecting certain laws --
+a ``function'' has an explicit \emph{type}; the key to generalizing derivatives
+from real functions to functions on arbitrary (even infinite-dimensional)
+linear spaces is to note that derivative is in fact an \emph{operator} that
+acts on increments in the input -- the Fr\'echet derivative; the key to
+generalizing derivatives to manifolds without vector structure is to note that
+the ``increments'' do not come from original space, but actually belong in the
+tangent bundle; the key to generalizing gradient descent algorithm to manifolds
+is to note that derivative of an objective function $\mathbb{R}^n \to
+\mathbb{R}$ is a \emph{row}-vector i.e. a linear functional that needs to be
+converted into an increment vector with transpostion, an implicit application
+Riesz's representation theorem; an attempt to generalize exponential function
+to manifolds points out that in the equation $\dot{x} = x$ the function $x$ is
+\emph{actually} from tangent bundle~\cite{nlabExpmap} to the manifold, and that
 derivative is in fact the covariant derivative (the linear connection) and not
 the pushforward; the key to generalizing convolutions to other domains and
 symmetries, is to observe that integation in $\int_{\mathbb{R}^n}
@@ -70,10 +78,13 @@ aside from all, allows the narrator to sound less pretentios, as if speaking
 from outside, avoiding personal claims. The pronoun might however still need
 some justification and we propose the following: let's assume that within this
 thesis ``we'' refers to narrator and the Reader. This gives meaning to
-expressions like ``we consider'', etc.  One more word on pronouns: throughout
-this work we treat tokens ``he'' and ``him'' as gender neutral so as to avoid
-the ugliness of ``them'', or rather as gender-\emph{less}, so as to promise
-that we imply no discrimination}
+expressions like ``we consider'', etc.  One more word on pronouns...
+I have tried for many years to use "they and
+them" as gender-neutral pronouns, yet I shall join~\cite{strictlyEnglish} in
+that it is ``an abominable and I want no part in it''.  However, instead of
+following the rule of ``masculine be taken to include feminine whenever
+necessary'' I would rather strip ``masculine'' of any identity and declare it
+the actual gender-less one, all throughout this thesis.}
 deal with so called ``geometric methods'' in deep learning having the needs of
 inverse graphics in mind. The general idea of geometric deep learning is to
 construct slightly less ``un-motivated'' (and, hopefully, more ``efficient'')
@@ -111,11 +122,11 @@ loops~\cite{sabinin1995gyrogroups}).  All three disciplines live their own
 lives. Hyperbolic deep learning, taking from all three, suffers from gaps and
 incosistencies. Thus we'd hope to (begin to) set a concise and unifying
 language for discussion of hyperbolic neural networks with our
-appendices~\nameref{appendix:manifolds} and~\nameref{appendix:hyperbolics}.  On
+appendices~\nameref{chap:manifolds} and~\nameref{chap:hyperbolics}.  On
 the practical side, we briefly consider image and pointcloud classification
 problems, discussing two new proof-of-concept models based on hyperbolic
 representations.  Unfortunately, as is these models do not provide desirable
 results, so we discuss prospective work that could still make them work.  Much
 of this thesis is inspired by the work done in collaboration with Max Kochurov
 and Rasoul Karimov, so we also give an overview of those collaborative efforts
-in the appendices~(\autoref{appendix:hconv}).
+in ~(\autoref{sec:hconv}).

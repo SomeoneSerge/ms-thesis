@@ -1,4 +1,4 @@
-\chapter{On the thesis process}
+\chapter{On the thesis process} \label{chap:processes}
 
 \epigraph{"Then I was inspired,\\
 Now I'm sad and tired"
@@ -34,35 +34,34 @@ thesis is not a story of success. It doesn't introduce novel methods that beat
 state of the art scores. Instead, it's a story of failed attempts -- that, of
 course, does happen in research. Yet, how can such a work make an impact, when
 even stronger ones are oft so soon shadowed.
-What could make a thesis worth reading? Who is the reader I shall have in mind
-as I write this? I believe it's the one who struggles. I have read a number of
-seminal works over these two years, and the part I always enjoyed the most was
-either ``Acknowledgements'' or ``Preface''.  Rather frequently, ``Preface''
-contains a personal story behind people's work.  There I could see all the pain
-authors went through along their ways. The mistakes they made. And everything
-that kept them going!  Thus my idea is that I'm writing for someone who is
-desperately trying to deliver the tiny little message, the one who makes bad
-choices, the who in spite of failures and disapproval still means to keep
-walking the path and engaging. I'm writing for future me.
+What could make this thesis worth reading? Who is the reader I shall have in
+mind as I write this? I have read some seminal works, and the part I always
+enjoyed the most was either ``Acknowledgements'' or ``Preface''.  Rather
+frequently, ``Acknowledgements'' contain a personal story behind people's work,
+the real motivation that goes into decision-making process.  There I could see
+the pain authors went through along their ways. The mistakes they made. And
+everything that kept them going! That part of their theses will never
+become obsolete, never irrelevant. There's always a reason to the choices
+an author makes, a motivating concept, even if barely-formed. There are always
+consequences. Reading about those less-public parts of other people's work was
+\emph{useful to me}. Thus is my idea for the thesis: to write for someone who,
+like me, struggles to form and communicate his pathetically little message,
+makes mistakes, and seeks to learn to do things right even basing on other
+people's experience.
 
 Now that we've figured out \emph{whom} this writing is for, we should concern
 ourselves with the question of \emph{what}. What message could be of use to The
 Reader? What words could resonate with The Reader's heart and convince of
-actual relevance to His\footnote{I have tried for many years to use "they and
-them" as gender-neutral pronouns, yet I shall join~\cite{strictlyEnglish} in
-that it is ``an abominable and I want no part in it''.  However, instead of
-following the rule of ``masculine be taken to include feminine whenever
-necessary'' I would rather strip ``masculine'' of any identity and declare it
-the actual gender-less one, all throughout this thesis.} work?  At this point
+actual relevance to His\footnote{Gender-less} work?  At this point
 I'd want to mention a little about my background, which hasn't much to do
 directly with ``Data Science''. I did a Bachelor's degree in something called
 ``Applied Mathematics'', specifically in the instance that mostly meant
 ordinary differential equations, optimal control, algorithms, and
 ``programming''. My Bachelor's scientific advisor -- Anatoly Baskakov -- was
-however nothing like that! He would always proudly say ``I am and always have
+however nothing like that! He would always proudly say: ``I am and always have
 been a Pure Mathematician!''.  Although I come not even close to comprehending
 his ideas, I would best describe his main interest as ``linear functional
-analysis'', showing that one could treat things like PDEs or Harmonic Analysis
+analysis'': showing that one could treat things like PDEs or Harmonic Analysis
 in a much more convenient setting, such as Banach spaces and modules. He'd also
 say ``it is in a way naive, to tackle the Nonlinear, when there's still so much
 work to be done on the Linear''. I aspire one day to say I am a pure
@@ -74,21 +73,23 @@ the point of ``I'd rather not bother writing the code, I'm more of a
 mathematician''. What of relevance do these transitions imply about the author,
 you might ask?  \emph{First} implication is that which I did \emph{not} have
 when starting my MSc:  I didn't have any ``geometrical'' courses -- Metric and
-Differential Geometry are crucial to my Master's work --, didn't have proper
+Differential Geometry are crucial to this thesis --, didn't have proper
 Probability, Statistics, and Physics -- the core of ``Statistical Learning
 Theory'' --, never had time to write a raytracer or rasterizer -- and lack of
 familiarity with Computer Graphics community's conventions was a significant
 impediment to my work --, nor did I have much of ``Foundations of Mathematics''
-like Categories~\citep{categoriesWorking}, Logic, Types, Functional
-Programming, Theorem Provers~\citep{coq,lean}, and whatever is called ``Model
+like Categories~\citep{categoriesWorking,goldblattTopoi,distributiveLawvere,categoryTheoreticUniversalAlgebra}, Logic,
+Types~\cite{thinkingWithTypes}, Functional
+Programming, Theorem Provers~\citep{coq,lean,buzzardLean}, and whatever is called ``Model
 Theory''~\citep{marker2006model} -- of huge importance on their own, these must
 soon prove instrumental in fixing the lamentous state of Array
 Programming~\citep{dexlang,mcdonellGPU} and managing Deep Learning
 pipelines~\citep{mokhov2018build}.  \emph{Second} implication was painful
 \emph{awareness} of my own lack of knowledge, and of the problems and
 inconsistenceis, that people in ``Applied Sciences'' -- in ``Deep Learning'' in
-particular -- tend to neglect and ignore.  For instance, a significant
-researcher in Bayesian methods nowadays might easily fail to describe what ``a
+particular -- tend to neglect and ignore.  For instance, an acknowledged
+researcher in Bayesian methods nowadays might -- and it's perfectly reasonable,
+he's just an expert in something else -- easily fail to describe what ``a
 derivative of a function\footnote{In the simple context of vector spaces} at a
 point'' actually is. It has been my belief that this lack of \emph{conceptual}
 understanding of underlying mathematical framework must be slowing down
@@ -113,7 +114,7 @@ Equation~\citep{kajiya1986rendering} and how do they relate to Maxwell's? To
 more ground questions, how does one
 annotate~\citep{documentationResearch,struturingDocumentation,doctest,doctestRust,doctestCpp}
 and statically check array shapes~\citep{rush2019tensor,rush2019tensor2} in
-\texttt{NumPy} or \texttt{PyTorch}, and what has it got to do with
+\texttt{NumPy} or \texttt{PyTorch}. What has it got to do with
 \emph{Dependent Types} and could one get by without them~\citep{dexlang,slap}?
 How does one ensure
 reproducibility~\citep{inriaSacred,catalyst,pytorchLightning,xinLiangPipelines,},
@@ -126,8 +127,6 @@ researcher in the ``Deep Learning''. I would imagine my Reader to be
 unsatisfied with such state of affairs. If I were to compress my message for
 you, Dear Reader, to bare minimum, it would be this: I am, too, trying to
 figure this all out.
-
-\section*{A condensed story of the last two years}
 
 The thesis you have at your hands, Dear Reader, has the title of ``Geometric
 Deep Learning for Inverse Graphics''. If my memory does not fail me, which it
@@ -153,9 +152,9 @@ Large Scale Optimization course by Yury Maximov. Students of Datascience-2018
 could tell many stories about the full month of sleepless nights, when we would
 only live to submit homeworks and kickstart ADMM~\citep{admmTweet,admmBoyd}.
 For me, however, it was first of all the time when we had to gather in teams to work
-on course projects. I and fellow students chose to reproduce results
+on course projects. Our group chose to reproduce results
 of~\citet{acceleratingNatgrad} and that was life-changing in two aspects: it
-began my long and fruitful collaboration with now-my-friend Max Kochurov, and I
+began my long and fruitful collaboration with Max Kochurov, and I
 finally started learning Differential Geometry. At that point we could barely
 decipher the math in the article, but we'd implement it nonetheless. On the project
 defence we received some important comments from Alexander Bernstein, but simply
@@ -187,14 +186,13 @@ version of the pre-print, referring to the concept of \( \delta \)-hyperbolicity
 but still omitting the question of ``what is curvature?''.
 The second point was the use of ``Einstein's midpoint''
 which as far as I could check did not coincide with Barycenter of uniform
-measure -- the minimizer of variance. Further, I failed to find any description
-of this ``midpoint'' as a minimizer or any objective function. That seemed like
+measure -- the minimizer of variance. That seemed like
 a worrisome fact: our entire framework is based on operating within specific
 metric manifold, but suddenly we use an averaging operation that doesn't in any
 way relate to the chosen metric? We'd need to either find a formula for the
 true Barycenter, or motivate the one already in use. Third major point was that
 the model essentially was a vanilla CNN with exponential map and hyperbolic
-distances at the end! So the concept was born, to really make \emph{hyperbolic}
+distances on top! So the concept was born, to really make \emph{hyperbolic}
 neural networks, in the fashion of Ganea and B\'ecigneul, only for images.
 It was Max's idea and I shall admit I wasn't particularly fond of it at the
 time, even though I'm rethinking it now, to make ``convolutional layers which
@@ -224,7 +222,7 @@ with signals defined on spheres and defined convolutional layers that appeal to
 abstract harmonic analysis. Their work clears up the thinking somewhat and
 makes it easier to understand how our ``convolutions'' were trying to exploit
 hyperbolicity in the wrong place: it was almost as if we were considering
-Mobius Transformations as the group of automorphisms acting on pictures!
+isometric M\"obius Transformations as the group of automorphisms acting on pictures!
 Doesn't quite add up! In this new light, in the problem of learning hyperbolic
 representations for Imagenet (which we're still interested in, because of
 relationships between classes and objects in the image) one could separate out
@@ -330,6 +328,6 @@ Disciplines and communication aren't something we \emph{can} learn in courses.
 Disciplines and communication are something most of us -- developers and
 researchers -- are particularly \emph{bad} at.  What is required to learn
 disciplines and communication, is actual \emph{exposure} and this is something
-universities \emph{could} help with\footnote{In fact, while innovation-related courses
-were all non-sense and lacked in content, they actually were good at exposing people
-to communication}.
+universities \emph{could} help with\footnote{In fact, while innovation-related
+courses all lacked in content, they actually were good at exposing people to
+communication}.

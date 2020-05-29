@@ -1,4 +1,4 @@
-\chapter{Inverse Graphics} \label{appendix:graphics}
+\chapter{Inverse Graphics} \label{chap:graphics}
 
 Much of our work, while often purely geometric and abstract, is motivated by
 the problem of reconstructing photorealistic models of real-world scenes.
@@ -100,3 +100,63 @@ the model is implemented in geoopt~\cite{geoopt}.
 
 One question which we hadn't time to touch upon and leave for the future is
 that of software design (as in: architecture) for graphics.
+Mostly, one has to figure out what design decisions there are to make,
+what problems to run into. I made no progress on this, but here are some
+possibly relevant links:
+\begin{itemize}
+\item There's CG course read by the Founding Fathers, \citet{blinnCatmullCG}.
+\item Jim Blinn also has the great ``Jim Blinn's corner'' series:
+\citet{jimTripPipeline,jimDirtyPixels,jimDirtyPixels}
+\item \citet{sg13ApiFailed} tells the story of (still non-existing) standard
+graphics in C++ and teaches a good lesson about evolution of APIs, time
+constraints, trust, and agile.
+\item \citet{shirleyRTWeekend} provides a beautiful introductory series on
+raytracing, that starts from a scratch and describes the concepts in simplest
+terms possible, without the burden of industry's legacy terminology and
+pre-made design choices. A good place to start and see the subjects plain
+without the overwhelming noisy background.
+\item The excellent PBR-Book of \citet{pbrBook} is a a literate
+programming-style book abot physically-based rendering techniques with industry
+standards-compliant implementations in C++ and gives sense as to what sort of
+challenges and decisions one has to face when designing software for compute
+graphics. Specifically, when deciding about camera models or the form of
+generic BRDF -- this book provides some background about what people out there
+are already using. This is apart from being a really great and accessible book
+about its subject. Especially note ``further reading'' page~\cite{pbrBookReading}.
+\emph{Aside: it could prove a fun experience to try pair-programming pbrt in
+e.g. Rust}.
+\item \cite{shirleyKimTeaching} is a relevant twitter thread started by Shirley
+and Kim -- contains a number of useful links on ``how to \emph{teach} computer
+graphics?''.
+\item One, short, of such references is \citet{texnh}.
+\item Of obvious importance is ``Graphics Gems'' series:~\citet{graphicsGems}.
+\item Another great series is realtimerendering:~\citet{RTR4}.
+\item Realtimerendering's's page on intersection procedures has a number of
+relevant links, including comprehensive books on the subject:~\citet{rtrIntersections}.
+\item More gems are about realtime \emph{ray tracing}~\citet{rtGems}.
+\item Further, NVIDIA has a series of blog posts on raytracing
+essentials~\cite{rtEssentials}.
+\item \citet{yoctoGL} is one of the attempts of making a non-object oriented
+(and rather functional-style) graphics library
+\item More on non-object oriented approaches, of interest
+are~\citet{functional3DGraphics,elliottTBAG}, and of course numerous works
+of~\citet{ActiveVRML,elliottAnimations}, which one could say served as an
+inspiration for entire discipline. Notably, Elm by~\citet{elm} takes root in
+these works. Some of the relevant examples of relevant implementations
+of these ideas for 3D graphics include~\citet{muncheongFunctionalGames}.
+\item Of interest are works of game developer~\citet{carpLang}, including his
+``static lisp'' -- the Carp language.
+\item \citet{levienPrefixSum} has a very curious blog on various things related
+to GPU, including GPU Compute.
+\item Already mentioned HyperRogue~\cite{hyperrogue} could serve as great a
+reference for visualizations of hyperbolic spaces, despite its monolithic
+structure.
+\item Carl De Boor -- another Founding Father for computer graphics, the student of Isaac Jacob
+``father of splines'' Schoenberg, demonstrates an excellent functional
+language~\cite{deboorSmoothingBspl}
+in his (often very applied) works on B-Splines and related. De Boor has a web-page
+on which one could find links to his excellent lectures:~\cite{deboorPage}
+\end{itemize}
+
+This list barely scratches the surface, but provides some starting points
+(...even if for myself).

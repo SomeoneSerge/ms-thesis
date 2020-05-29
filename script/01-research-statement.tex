@@ -11,9 +11,9 @@
 % > Justification of reseach relevance is mandatory.
 
 
-\chapter{Overview of the work}
+\chapter{Premises} \label{chap:premises}
 
-\section{Subject's history and background} \label{sec:history}
+\section{Emergence of hyperbolic deep learning} \label{sec:history}
 
 In 2017-2018~\cite{nickelKiela17} it came to attention of deep learning community, that for a
 Euclidean space of fixed dimension, \( \mathbb{R}^n \) with usual distance
@@ -53,10 +53,10 @@ of Euclidean space. We shall clarify this statement in later sections.
 \citet{ganeaHNNs} introduce hyperbolic neural layers which operate on
 hyperbolic embeddings and can be arbitrarily stacked into deep networks.  To
 save space, we cover this subject in more detail (including references) in the
-appendix:~\nameref{appendix:hyperbolics}. \nameref{appendix:manifolds} may be
+appendix~\nameref{chap:hyperbolics}. \nameref{chap:manifolds} may be
 a prerequisite for that section.
 
-\subsection{Hyperbolic Image Embeddings}
+\subsection*{Hyperbolic Image Embeddings}
 
 \citet{khrulkov} endeavour to explore ``hidden hierarchies'' of classes of
 objects in image datasets, like \texttt{MiniImageNet}. Specifically, in the
@@ -66,7 +66,7 @@ They then improve off-the-shelf CNNs by appending exponential map layer on top
 of them and use hyperbolic distances between embeddings for the final
 decision rule.
 
-\subsection{Convolutions for ``hyperbolic arrays''} \label{appendix:hconv}
+\subsection{Convolutions for ``hyperbolic arrays''} \label{sec:hconv}
 
 \begin{figure}[ht]\center
 \begin{tikzpicture}[scale=0.5, every node/.append style={transform shape}]
@@ -89,7 +89,7 @@ of variance and (variance-minimizing) barycenter of a measure in a metric
 space. Results are not satisfying, so we do not discuss the model in detail.
 The general idea however is relevant to the rest of the work.
 
-\subsection{Equivariant CNNs}
+\section{Equivariant CNNs} \label{sec:equivariant}
 
 A parallel line of geometric method's development relates to the idea of
 equivariance. The most succesful idea in deep learning is arguably that of
@@ -128,6 +128,7 @@ transformations.
 For a more detailed treatment of (non-Euclidean) Harmonic analysis one could
 refer
 to~\citet{axlerHarmonic,
+elliott2019generalized,
 explorationsHarmonic,
 benedettoHarmonic,
 stollharmonic,
@@ -139,7 +140,7 @@ metnioned~\cite{feichtingerFAHA}.
 \citet{eyeRotations,zhou2019glosh,scnnNiessner} are another kind of appearances
 of Harmonic analysis concepts.
 
-\subsection{Graph convolutions}
+\section{Graph convolutions}
 
 One more direction for geometric methods is neural networks operating on graphs.
 We refer the Reader to~\citet{kipf}.
@@ -147,12 +148,12 @@ We refer the Reader to~\citet{kipf}.
 Graph-convolutional methods are also being used for 3D data. The Reader might
 take a look at~\citet{edgeconv} which is particularly relevant to this thesis.
 
-\subsection{Geoopt} \label{sec:geoopt}
+\section{Geoopt} \label{sec:geoopt}
 
 This thesis is closely related to the geoopt~\cite{geoopt} package, a joint
 effort of Max Kochurov, Rasoul Karimov, and your narrator.
 Geoopt is python package for Riemannian optimization in \texttt{Pytorch}.
-More background on Riemannian optimization is in the Appendix~\nameref{appendix:manifolds}.
+More background on Riemannian optimization is in the Appendix~\nameref{chap:manifolds}.
 Starting this development, the authors hadn't much familiarity with
 differential geometry, nor with optimization on manifolds in particular. One of
 the consequences is that we simply couldn't have been aware of what use-cases
@@ -177,6 +178,8 @@ vector under assumed embedding into ambient vector space. Restricting ourselves
 to such representations wasn't an easy and immediate decision, but at the time
 we couldn't find useful use-cases for introducing e.g. local charts.
 
+\subsection{Current limitations of geoopt} \label{sec:geooptTodo}
+
 ``...since brevity is soul of wit, and tediousness the limbs and outward
 flourishes, I will be brief'':
 \begin{itemize}
@@ -196,115 +199,3 @@ well as more consistent language.
 
 \section{Statement and methodology} \label{sec:statement}
 
-We consider two rather naive models, one for image classification, and one for
-pointclouds. The two models however share many similarities and are in no way
-tied to these particular tasks, and we only choose classifcation as a
-playground to evaluate the models.
-
-\subsection{Hyperbolic convolutions for image embeddings} \label{sec:hconv}
-
-Developing upon a collaborative project described
-in~\hyperref[appendix:hconv]{Appendix-\ref*{appendix:hconv}}, we propose a next
-iteration of the model. Recall that in the model we construct hyperbolic
-embeddings for each input image's pixel, producing a ``\( 2 \)-dimensional
-array of manifold-points''. This array is then scanned with a sliding window,
-and points within each window are ``aggregated'' to produce a point for the
-output array. Aggregation amounts to application of some sort of ``reusable
-filters'' that are deemed to match various ``patterns''. The intuition for this convolution
-of ``hyperbolic arrays'' is to treat the embeddings as nodes in a ``continuous'' tree
-and construct a decision rule for sinking down the tree based on ``neighbour nodes''.
-We note that in the original model, the aggregation step is a function of the
-``absolute positions'' of the points, measured with respect to a fixed origin.
-We also note, that the success of the classical (Euclidean) convolution in
-``pattern-matching'' is understood to be due to its invariance properties,
-specifically the invariance with respect to translations. Developing this intuition,
-we propose to simply replace the \( \log_0 \) in the aggregation step
-with logarithmic map \( \log_x \) from some point \( x \) in the window, thus
-producing a decision rule based only on ``relative directions'' towards neighbours
-and independent of ``which subtree we're in''
-
-\begin{figure}[ht]\center
-\includegraphics[width=.5\textwidth]{art/neighbours.pdf}
-\caption{Relative directions to neighbour embeddings. To an embedding \( y \)
-there corresponds a tangent vector \( Y = \log_x y \), visualized here as a
-geodesic line segment in Poincar\'e ball.}
-\end{figure}
-
-\subsection{Hyperbolic EdgeConv} \label{sec:hedgeconv}
-
-\citet{edgeconv} propose a convolutional layer that operates directly on
-pointclouds (producing a ``cloud of embeddings'' after each step, similar to
-how we produce a regular \( 2 \)D \emph{array} of embeddings in the section
-above). This layer dynamically constructs a \( k \)-nearest neighbours graph
-from the input pointcloud, and then transforms each point by aggregating it
-with adjacent nodes. Specifically, for each neighbour of a node under
-consideration, a message is constructed using an MLP that ``eats'' a point and its
-location relative to the node. A pooling is then used to aggregate the messages
-and produce the output point.
-
-Replacing the subtraction with logarithmic map in message formation, and using
-manifold distances when constructing \( k \)-NN graph, we can generalize the
-operation to hyperbolic embeddings. A number of concerns remains: the original
-model uses Batch Normalization and rectifying non-linearities. Search for
-meaningful non-linearities for hyperbolic neural networks remains an open
-problem. Batch Normalization is straightforwardly generalized, but only
-partially: mean and variance make perfect sense in general metric space
-setting, but \emph{co}variances inherently rely on the product-structure of
-vector space-valued random variables.
-
-We note that our convolutions for arrays of hyperbolic points from the previous
-section are in fact an instance of such EdgeConv, if an image is treated as a
-regular grid-like graph. In particular, in our implementation of EdgeConv we
-allow image inputs by deleting \textrm{KNNEdges} layer that dynamically
-constructs the \( k \)-NN graph from the input.
-
-\begin{figure}[H]\center
-\includegraphics[width=.75\textwidth]{art/hyperbolic-edgeconv.pdf}
-\caption{
-    Visualization of EdgeConv from~\citet{edgeconv} and the change
-        required to EdgeConv implementation of~\citet{pytorchGeometric}
-}
-\end{figure}
-
-\section{Results} \label{sec:results}
-
-Just as model in Appendix~\autoref{appendix:hconv}, our model proved to heavily
-suffer from overfitting and fail to learn under reasonable regularization.  Our
-naive hyperbolic edge convolution slightly under-performs compared to
-baselines, but using much less parameters. However, that comes at cost of
-longer iterations and so far we haven't succeeded at beating the baselines.
-
-\section{Discussion} \label{sec:discussion}
-
-There's a number of conceptial inconsistencies with considered models.  First
-of all, in both cases the ``convolution'' happens along the spatial dimensions
-(over window pixels in an image, and over graph edges in EdgeConv). The image
-case is especially good at illuminating the inconsistency: our input is a
-signal on Euclidean plane, and we're trying to construct an operation invariant
-with respect to... what group exactly? While this is not what we did, think
-what sense does M\"obius transformation of a photograph make? It's a type
-mismatch.
-\citet{s2cnn} carefully reformulate a problem at hand so that the input to the
-model is a signal on a sphere, and apply a classic convolution equivariant with
-respect to the group of rotations. Similarly, for our ``convolutions of
-hyperbolic arrays'' or ``hyperbolic edge convolutions'', we shall first find an
-interpretation of our input as a signal on certain space and then describe an
-operation invariant (or equivariant) with respect to appropriate
-transformations. Such operation should interpretable as aggregation in EdgeConv,
-and also follow the inutition of the ``continuous trees'' metaphor as
-in~\autoref{appendix:hconv}. In our current models we involuntarily interpret
-hyperbolic points within the sliding window as a trivial hyperbolic signal (sum
-of delta measures). By taking the logarithmic map from one of the points in the
-window, we make our ``convolution'' invariant with respect to translations of
-hyperbolic space. However we might in fact want equivariance with respect to
-all unit ball-preserving M\"obius transformations (isometries of Poincar\'e disk)
-and we could employ the technique similar to~\cite{s2cnn} and integrate
-over the entire group of isometries. We cannot hope to implement that efficiently
-without the tricks of Harmonic analysis. \citet{stollharmonic} works out the
-Harmonic analysis on real Hyperbolic space, including the spherical harmonics
-basis. We should also note that our singular (combination of delta measures)
-signal might turn out not to be the most convenient to work with in terms of
-complexity of computations, nor the most representative one. In other words, we
-must reconsider the way we construct and represent a signal on a Hyperbolic
-space. Finally, the problem of coming up with meaningful nonlinearities
-for general manifolds and particularly Hyperbolic spaces remains open.

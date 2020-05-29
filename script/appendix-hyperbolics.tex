@@ -1,17 +1,78 @@
-\chapter{Hyperbolic representations}\label{appendix:hyperbolics}
+\chapter{Hyperbolic representations }\label{chap:hyperbolics}
 
 What is the position of Gyrovector formalism, Einstein midpoints, and, often
 set-free, hyperbolic geometry as relative to the framework of differential
 geometry?
 
-We first introduce the Hyperbolic space as the upper sheet of a hyperboloid in
-Minkowski space. Then we show how the upper-sheet can be projected into
-Poincar\'e ball model (with inherited metric) and further to upper-halfspace.
-Until this point, we only discuss underlying sets and local differential
-properties, such as local metric. To evaluate synthetic properties of the
-Hyperbolic space, e.g. to compute distances between points, we then switch
-between the available models arbitrarily -- they are isometric by construction,
-while different tasks are easier accomplished in different models.
+\citet{beardonMindaHyp} do a good job at introducing different models of
+Hyperbolic geometry and their metrics, but allows certain amount of
+implicitness -- it is sometimes not clear where their Mathematics is
+internalized in, and what exactly are types of objects they operate with. We'd
+like to see a similar treatment of the subject but consistent with the language
+of Frederic Schuller's lectures, which we chose as a reference.
+
+\citet{ungarDiffGeom} connects Ungar's Gyrovector formalism with related
+concepts in differential geometry, but assumes an ``intuitive understanding''
+of the subject, rather than explicit descriptions. For instance, the author
+talks about ``differentials'' \( \Delta s = (v + \Delta v) - v \) rather than
+tangent vectors\footnote{And one should acknowledge that many physicists tend
+to understand these not even as ``infinitesimals'', but as actual ``small
+numbers''}. In other words, we're not satisfied by their description because of
+\emph{dynamic typing}. One more nuisance with their approach is that it begins
+with rather overwhelming and abstract axiomatic description of Gyrovector
+spaces and groups, rather than with description of hyperbolic motions followed
+by summarization of their \emph{properties}.  In the first case we get a huge
+number of mutually redundant \emph{axioms} in the premises of the theory, and
+these axioms aren't something people have thoroughly discussed and learned to
+accept as foundations. In the second case, these ``axioms'' are \emph{useful
+consequences} of something we already live with.
+
+\section{An outline of a possible introduction of hyperbolic geometry}
+
+We first introduce the Hyperbolic space as the upper sheet of the hyperboloid in
+a Minkowski flat space -- the \( \mathbb{R}^{n+1} \) endowed with Minkowski
+pseudo-inner product and trivial metric manifold structure.
+The hyperboloid inherits the local metric from ambient Minkowski space via the
+pull-back under trivial (identity) embedding -- the inherited metric is
+actually a Riemannian (positively-definite) one, although we skip demonstration
+of this fact.
+The upper-sheet can be projected onto Poincar\'e ball model -- the unit ball in
+\( \mathbb{R}^n \), and further to upper-halfspace
+\( \{x\in\mathbb{R}^n\left|x_n > 0 \right. \} \), always inheritic the local
+metric using pull-back under inverse of projection.  Until this point, we only
+discuss underlying sets and local differential properties, such as local
+metric. To evaluate synthetic properties of the Hyperbolic space, e.g. to
+compute distances between points, it is often convenient to switch between the
+available models arbitrarily -- they are isometric by construction, while
+different tasks are easier accomplished in different models.
+
+For instance, in the upper half-plane the local metric becomes \(
+\frac{y^2}(\operatorname{d}\mathrm{x}^2 + \operatorname{d}\mathrm{y}^2) \) and
+it becomes obvious that for two points on the same vertical line the geodesic
+curve that connects them is the segment of vertical line.  It is also
+straigtforward to compute the length integral of that curve and obtain \( \ln
+y_1 - \ln y_0 \) for points \( (x, y_1) \), \( (x, y_0) \), with \( y_1 \geq
+y_0 \). Computation of distances between arbitrary points becomes possible,
+when one discovers an \emph{isometric} self-map that puts any two points onto
+same vertical (in fact one can move any \emph{triple} to any desired places in
+the half-plane).
+
+An important observation is that mappings between all the mentioned models of
+Hyperbolic geometry are realized by so called \emph{inversions} in spheres and
+planes. Moreover, \emph{all} isometric self-maps of introduced hyperbolic
+spaces are realized by finite combinations of such
+inversions~\cite{beardonMindaHyp,beardonGeometryDiscrete}. Finite compositions
+of inversions are called \emph{M\"obius transforms} and they are key to
+analysis of hyperbolic motions, i.e. to the discussion of geodesics and
+exponential maps in hyperbolic model spaces. In fact, Ungar's gyro-operations
+can be seen as a convenient language for discussion of isometric M\"obius
+transformations of Poincar\'e ball.  The fact that inversions in planes and
+spheres describe all possible isometries is fundamental. For example, while we
+generally like \emph{balls} and deem them relatively simple constructions, it
+would feel \emph{unnatural} to propose a half-plane as the first model of
+Hyperbolic geometry. One could think: ``there must be an intrinsic reason we
+got to cut the other half off''. Inversions turning spheres into planes is
+exactly that intrinsic reason.
 
 \section{Hyperboloid and Poincar\'e disk models}
 
@@ -117,7 +178,7 @@ g_H(\phi_*\partial_i,~\phi_*\partial_i)
 Thus
 \[ \left.\phi^*\right|_p g_H = \frac{4}{(1 - \|p\|_2^2)^2} \operatorname{d}\mathrm{p}^2. \]
 
-This is the Poincar\'e metric usually given in papers just by formula, only now
+This is the Poincar\'e metric usually given in papers just as a formula, only now
 we've made sure that this metric is \emph{indeed} the pullback of Hyperboloid's
 metric under the central projection, and the two models of hyperbolic geometry
 are isometric by-construction. This metric is conformal (preserves angles), as
@@ -126,7 +187,8 @@ it's a multiple of the ambient Euclidean local metric \( \operatorname{d}\mathrm
 
 \section{Poincar\'e upper halfplane}
 
-Obtained from the Ball via inversion in a sphere.
+Obtained from the disk via inversion in the sphere \( S((0, -1), \sqrt{2}) \)
+(and similarly in higher dimensions).
 
 Results in underlying set \( \{ x\in\mathbb{R}^n \left|~x_n > 0\right.\} \)
 and the pull-back metric \( \frac{1}{x_n^2} \operatorname{d}\mathrm{x} \).
@@ -164,9 +226,9 @@ Hyperbolic spaces are of utmost importance. An entry point is~\citet{gromov}.
 
 \section{Harmonic analysis}
 
-For our further work on ``hyperbolic convolutions'' familiarity with harmonic
-analysis and gauge theory is required. \nameref{sec:history} provides
-a number of relevant links.
+For our further work on ``hyperbolic convolutions'' we need to gain some
+familiarity with Harmonic Analysis and Gauge Theory.
+\nameref{sec:equivariant} provides a number of relevant links.
 \citet{stollharmonic} discusses PDEs on real Hyperbolic space, and e.g.
 describes solutions to Laplace equation (the spherical harmonics).
 
@@ -182,13 +244,14 @@ barycentre of the uniform measure concentrated on those points, i.e. barycentre
 of \( \frac1n\sum_{i=1}^n \delta_{p_i} \).
 
 The Einstein's midpoint, used e.g. in~\cite{khrulkov} is not
-the\footnote{``the'', as in negatively-curved spaces barycentres are unique}
+the\footnote{``the'', as in negatively-curved spaces barycentres are unique and
+always exist}
 variance minimizer for Hyperbolic space. Instead, ``Einstein's midpoint'', or
 Einstein's \emph{average} of relativistic velocities \( v_1, \ldots, v_n \)
 (relative to a chosen rest frame) of particles with invariant masses \( m_1,
-\ldots, m_n \), is the velocity of the center of momentum frame of
+\ldots, m_n \), is the velocity of the center-of-momentum frame of
 this system. To give sense of what functional ``midpoint'' minimizes, the
-center of momentum-frame is the frame in which total energy of the system is
+center-of-momentum frame is the frame in which total energy of the system is
 minimized, or, equivalently, one in which perceived total momentum vanishes.
 
 \citet{diffThroughFrechet} propose a differentiable iterative algorithm
