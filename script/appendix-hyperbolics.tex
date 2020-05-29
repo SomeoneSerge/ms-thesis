@@ -74,6 +74,14 @@ Hyperbolic geometry. One could think: ``there must be an intrinsic reason we
 got to cut the other half off''. Inversions turning spheres into planes is
 exactly that intrinsic reason.
 
+Studying isometries one should conclude about geodesics, exponential maps, and
+parallel transportation in hyperbolic model spaces. Connections to Ungar's
+gyro-formalism could be outlined. At this point one must be able to implement
+the basic Riemannian gradient descent on these spaces.
+
+Finally, we'd like to evaluate various measures of curvature in these spaces.
+Alack we couldn't do that in time.
+
 \section{Hyperboloid and Poincar\'e disk models} \label{sec:poincareBall}
 
 It seems to be a reasonably motivated to introduce a hyperbolic metric by
@@ -101,19 +109,30 @@ H &= \left\{ (x, t) \in \mathbb{R}^{n+1} \left| Q((x,t), (x,t)) = -1,~ t>0 \righ
 &= \left\{ (x, t) \in \mathbb{R}^{n+1} \left| \sum_{k=1}^n x_k^2 - t^2 = -1,~t>0 \right.\right\}.
 \end{align*}
 
-The upper-sheet is a metric manifold, with global chart \( x \mapsto (x,
-\sqrt{1 + \|x\|_2^2}) \), and metric induced from ambient Minkowski space. This
+\begin{wrapfigure}{r}{.25\textwidth}
+    \center
+    \caption{Tiling of the Poincar\'e Disk by~\citet{bulatovConformal}. The lines
+    are geodesic curves}
+    \includegraphics[width=.8 \linewidth]{art/tiling-disk.pdf}
+\end{wrapfigure}
+
+The upper-sheet is a metric manifold, with global chart
+\( (x, x_{n+1}) \mapsto x \) and its inverse
+\( x \mapsto (x, \sqrt{1 + \|x\|_2^2}) \). The local metric is induced from
+ambient Minkowski space. This
 pull-back metric is a Riemannian (positive-definite) metric. However, instead
 of investigating this metric on the Hyperboloid, we will straight away consider
 the Stereographic projection that maps upper-sheet onto the \emph{Poincar\'e
-ball} \[ \mathcal{P} = \{ p\in\mathbb{R}^n\left|~\|p\|_2^2 \leq 1\right.\}. \]
+ball}
+\( \mathcal{P} = \{ p\in\mathbb{R}^n\left|~\|p\|_2^2 \leq 1\right.\}. \)
 This map is realized as follows: a point \( (x, t) \) on the upper-sheet is
 projected onto the horizontal plane \( \{ (y, 0) \left| y\in
 \mathbb{R}^{n}\right. \} \) with the center of projection at the vertex of the
 lower-sheet, i.e. \( (0, -1) \). One can easily derive that the projection is \(
 (x, t) \mapsto \frac{1}{1+t}x: H\to\mathcal{P} \), and has the inverse \(
-\phi:\mathcal{P}\to H, \) \[ \phi(p) = (\frac{2p}{1 -
-\|p\|_2^2},~\frac{1+\|p\|_2^2}{1-\|p\|_2^2}). \]
+\phi:\mathcal{P}\to H, \)
+
+\[ \phi(p) = (\frac{2p}{1 - \|p\|_2^2},~\frac{1+\|p\|_2^2}{1-\|p\|_2^2}). \]
 
 The Poincar\'e ball has a very natural global chart -- the identity map \(
 \mathrm{p}=p\mapsto p \), which induces a convenient basis of partial
@@ -121,7 +140,7 @@ derivatives,
 \( \operatorname{id}_*\partial_i\simeq\partial_i,~i=\overline{1,n}, \) in the
 tangent bundle \( \mathcal{T}\mathcal{P} \). The projection inverse \( \phi \)
 allows to pull-back the Minkowski metric inherited by upper-sheet onto
-Poincar\'e disk: \[ (\operatorname{id}_{H\to(\mathbb{R}^{n+1},g_H)}\circ
+Poincar\'e disk: \[ (\operatorname{id}_{H\to(\mathbb{R}^{n+1},~g_H)}\circ~
 \phi)^* g_H = \phi^*g_H. \]
 It's useful to describe this metric in chart-induced
 coordinates. Specifically, we need to compute
@@ -183,25 +202,31 @@ we've made sure that this metric is \emph{indeed} the pullback of Hyperboloid's
 metric under the central projection, and the two models of hyperbolic geometry
 are isometric by-construction. This metric is conformal (preserves angles), as
 it's a multiple of the ambient Euclidean local metric \( \operatorname{d}\mathrm{p}^2
-\).
+\). In fact, this is exactly why we Poincar\'e ball is so convenient case for Geoopt
+-- the charts are identity, the coordinates of tangent vectors are exactly what
+geometric (``visual'') intuition suggests, vectors can be parallely transported,
+logarithmic maps commute with M\"obius addition... everything ``just works''!
 
 \section{Poincar\'e upper halfplane}
+
+\begin{wrapfigure}{r}{.25\textwidth}
+    \center
+    \includegraphics[width=.8 \linewidth]{art/tiling-uhp.pdf}
+    \caption{Tiling of the Upper Half-Plane by~\citet{bulatovConformal}. The lines
+    are geodesic curves}
+\end{wrapfigure}
 
 Obtained from the disk via inversion in the sphere \( S((0, -1), \sqrt{2}) \)
 (and similarly in higher dimensions).
 
+
 Results in underlying set \( \{ x\in\mathbb{R}^n \left|~x_n > 0\right.\} \)
 and the pull-back metric \( \frac{1}{x_n^2} \operatorname{d}\mathrm{x} \).
-
 Distance of a vertical segment can be easily integrated...
-
 Geodesic between points on the same vertical line is exactly the vertical line segment...
-
 M\"obius transformations are isometries...
-
 One can move any two points onto same vertical line via M\"obius transformation
 and then compute the distance...
-
 Stereographic projection is also a simple M\"obius transformation, specifically
 an inverison in a sphere (plus throwing away a coordinate)...
 

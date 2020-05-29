@@ -162,12 +162,22 @@ smooth sections of \( \mathcal{T}M \) are \emph{vector fields} -- smooth assignm
 of a direction at each point of \( M \). A \emph{metric} is a smooth section
 of the bundle of bi-linear forms \( T^0_2M \).
 
-A metric \( g \) allows to convert a tangent vector \( X\in\mathcal{T}_p M\)
-into a cotangent vector \( g(X,~\cdot) \), and back \( \omega\mapsto \sharp(\omega) \)
-such that \( \omega(Y) = g\left(\sharp(\omega),~Y\right) \) for all tangents \( Y \).
-The only tool we're missing now is the ``addition'' operation that given a
-``direction'' would allow to ``push'' a point along it in order to adjust
-parameters.
+A metric \( g \) allows to convert between tangent vectors and their dual
+covectors.
+We use the ``musical'' symbols for operators
+converting between vectors and covectors, the ``flat'' and ``sharp'' -- this
+terminology is inspired by interpretation of ``lowering'' and ``raising''
+the indices~\cite{leeRiem}. Specifically,
+\[ \flat = X \mapsto g(X, \cdot): \mathcal{T}M\to \mathcal{T}^*M, \]
+\[ \sharp = \flat^{-1} : \mathcal{T}^*M \to \mathcal{T}M. \]
+Specifically, a tangent \( X\in\mathcal{T}_p M\) corresponds the linear
+functional \( X^\flat = g(X,~\cdot) = Y \mapsto g(X, Y) \), and the inverse is \(
+\omega\mapsto \omega^{\sharp} \) such that \( \omega(Y) =
+g\left(\omega^{\sharp},~Y\right) \) for all \( Y \)
+
+The only tool we're missing now is the ``addition'' operation that, given a
+``direction'', would allow to ``push'' a point along it in order to adjust
+parameters. 
 
 \subsection*{Chart-induced bases}
 
@@ -193,6 +203,13 @@ f\left(\mathrm{x}^{-1}\left(\mathrm{x}_1(p), \ldots, x_i, \ldots,
 Given this basis, the local metric can be described by coefficients
 \( g(\partial_{x^i}, \partial_{x^j}) \).
 
+Finally, one should note that this induces coordinates on the tangent bundle \(
+\mathcal{T}M \), as any \( X_{p,\gamma} \in \mathcal{T}M \) can be described
+by the point \( (x_1(p), \ldots, x_n(p), X_1(p), \ldots, X_n(p)) \),
+where \( X_i \)'s are coefficients in decomposition of \( X \) with respect
+to basis of \( \partial_{x_j} \)'s. One can verify that this indeed generates
+a valid atlas and that \( \mathcal{T}M \) is a \(2n\)-dimensional manifold.
+
 \subsection*{Covariant derivative, geodesic equation, exponential map, parallelism}
 
 How do we ``perform a step'', i.e. given a direction, how do we ``follow it in
@@ -210,9 +227,12 @@ certain conditions (definitely met in a Hyperbolic space) this curve can be
 indefinitely extended. We approach the concept of the \emph{exponential map} --
 the evolution function of this initial value problem, which takes a tangent
 vector of initial velocity and returns the point at which one would arrive
-following the integral curve for unit time.\footnote{Skoltech version of this
-thesis should get fancy pictures here as Skoltech's deadline for antiplagiarism
-check is later than HSE's}
+following the integral curve for unit time. There's a number of irregularities
+to take care of, but for the rest of the chapter we can think think
+that exponential map is defined on entire tangent bundle (this is perfectly
+valid for Hyperbolic spaces, but positive curvature makes things more involved)
+\( \exp: TM \to M \). We'll also denote \( \exp_p: \mathcal{T}_pM \to M \)
+the exponential map from a fixed point.
 
 We should definitely discuss differentiation of vector fields (covariant
 differentiation), and the induced notion of parallel transport of vectors,
@@ -279,22 +299,32 @@ language that it develops.
 
 Early works on hyperbolic embeddings used to make vague claims about data
 possessing ``hidden hyperbolic structure'' while avoiding exact definitions of
-curvature, of which in fact there could be many. Later practitioners, learned
-to refer to Gromov's~\cite{gromov} work introducing the measure \( \delta
-\)-hyperbolicity.  It has also been acknowledged that this ``hidden curvature''
-comes not from just data, but from optimization problem: thus the updated
-pre-print of \citet{khrulkov} measures hyperbolicity of \texttt{MiniImageNet}
-by measuring hyperbolicity of the distance between learned embeddings.
+curvature, of which in fact there could be many. Later practitioners learned
+to refer to Gromov's~\cite{gromov} work introducing the \( \delta
+\)-hyperbolicity. A \emph{pointed} metric space with distance \( d \) and reference point \( x_0 \) is called \( \delta \)-hyperbolic if
+\[ p\cdot q \geq \min(p\cdot r, q\cdot r) - \delta, \]
+for any points \( p, q, r \).
+Here, for any \(x, y \) the \( x\cdot y \)
+denotes the quantity \( \frac12 (d(x, x_0) + d(y, y_0) - d(x, y)) \).
+It has also been acknowledged that this ``hidden curvature'' comes not from
+just data, but from optimization problem: so the updated pre-print of
+\citet{khrulkov} measures hyperbolicity of \texttt{MiniImageNet} by measuring
+hyperbolicity of the distance between learned embeddings.
+
+There's a more general framework of CAT (Cartan, Alexandrov, Toponogov) spaces
+and \emph{curvature bounds} which I believe we (those interested in hyperbolic
+deep learning) should master.
 
 \subsection*{Synthetic: Curvature bounds}
 
-Here should be an inspiring story about triangles and quadruples, but the
-time doesn't allow us to include it.
+Here should go an inspiring story about triangles and quadruples, but the time
+doesn't allow us to include it.
 For a motivating introduction, the Reader could refer to the most beautiful
 talk of~\citet{villaniTriangles} and then his manuscript~\cite{villaniOldNew}.
-Of particular interest is the seminal work of~\citet{sturm} on Wasserstein
+\citet{burago} and \citet{alexander} give an introductino to metric geometry.
+Less related are but inspiring are the seminal work of~\citet{sturm} on Wasserstein
 distances between probability measures on metric spaces with curvature bounded
-below. Related is~\citet{le2017existence}.
+below, and~\citet{le2017existence}.
 
 \subsection*{Analytic: Gauss, Riemann, Ricci}
 
@@ -302,13 +332,12 @@ Sectional and Gaussian curvature, come up as coefficients in the correction to
 the the length of the hypothenuse of a triangle, and the area of a ball in a
 curved space as compared to Euclidean prediction.
 E.g. \citet{burago} describe Gaussian curvature in a (homogeneous and
-symmetric) metric space as the number \( K(p) \) which appears in \(
-\operatorname{Vol}(B(p, r)) = \pi r^2 - \frac{\pi}{12}K(p) r^4 + o(r^4) \).
+symmetric) metric space as the number \( K(p) \) which appears in
+\[ \operatorname{Vol}(B(p, r)) = \pi r^2 - \frac{\pi}{12}K(p) r^4 + o(r^4). \]
 
-...
-
-Ricci curvature -- average of the sectional curvature:
-\( \operatorname{Ricci}(X) = \sum_{i=1}^n \varkappa(X, \partial_{x_i}). \)
+Ricci curvature is the quadratic form \( \operatorname{Ricci} \) that measures
+average of the sectional curvature \( \varkappa \):
+\[ \operatorname{Ricci}(X) = \sum_{i=1}^n \varkappa(X, \partial_{x_i}). \]
 
 Again, there isn't time and place to discuss this subject in depth,
 so the Reader better refer to~\citet{leeRiem}
