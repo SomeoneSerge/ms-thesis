@@ -29,7 +29,7 @@ producing a decision rule based only on ``relative directions'' towards neighbou
 and independent of ``which subtree we're in''
 
 \begin{figure}[ht]\center
-\includegraphics[width=.5\textwidth]{art/neighbours.pdf}
+\includegraphics[width=.9\textwidth]{art/neighbours.pdf}
 \caption{Relative directions to neighbour embeddings. To an embedding \( y \)
 there corresponds a tangent vector \( Y = \log_x y \), visualized here as a
 geodesic line segment in Poincar\'e ball.}
@@ -64,7 +64,7 @@ allow image inputs by deleting \textrm{KNNEdges} layer that dynamically
 constructs the \( k \)-NN graph from the input.
 
 \begin{figure}[H]\center
-\includegraphics[width=.75\textwidth]{art/hyperbolic-edgeconv.pdf}
+\includegraphics[width=.9\textwidth]{art/hyperbolic-edgeconv.pdf}
 \caption{
     Visualization of EdgeConv from~\citet{edgeconv} and the change
         required to EdgeConv implementation of~\citet{pytorchGeometric}
@@ -77,9 +77,40 @@ Just as model in Appendix~\autoref{sec:hconv}, our model proved to heavily
 suffer from overfitting and fail to learn under reasonable regularization.  Our
 naive hyperbolic edge convolution slightly under-performs compared to
 baselines, but using much less parameters. However, that comes at cost of
-longer iterations and so far we haven't succeeded at beating the baselines.
+longer iterations. In~\autoref{fig:hedgeconvAccCurve} one can see
+the accuracy our model evaluated on classification of Modelnet40
+dataset and in~\autoref{fig:edgeconvComparison} the comparison
+against baselines.
 
-While it would be desirable to describe in details ways in which model
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c c c c c c|} 
+ \hline
+ Model & \(\sharp\) parameters & \( \sharp \) epochs & PCD size & Accuracy & Class-balanced
+ \\ [0.5ex] 
+ \hline\hline
+ EdgeConv & \( 1 \)M & ?  & \(1024\) & \(.92\) & \(.902\)  \\ 
+ 3DShapeNets & \( 5 \)M & \( ? \)  & \( ? \) & \(.847\) & \(.773\)  \\ 
+ OURS & \( 85 \)K & 10 & 768 & \(.785\)  & \( .712 \) \\ [1ex] 
+ \hline
+\end{tabular}
+\caption{Comparison of results on Modelnet40 classifciation.  Our main
+reference is the original~\citet{edgeconv} as is not too far from SOTA and we
+haven't yet beaten it as a baseline anyway. \citet{edgeconv} also note
+that ``with fewer than \( 512 \) points [in the pointcloud subsample]
+the performance degerates dramatically'', however we were only able
+to evaluate the model with \( 512 \)--\( 768 \) points -- our
+experimental abilities are limited by what free Google Colaboratory has
+offer}
+\label{fig:edgeconvComparison}
+\end{table}
+
+\begin{figure}[h]\center
+\includegraphics[width=.9\textwidth]{art/hedgeconv-tensorboard.pdf}
+\caption{Accuracy and class-balanced accuracy of hyperbolic edgeconv with 85K
+parameters on Modelnet40 classification}
+\label{fig:hedgeconvAccCurve}
+\end{figure}
 
 \section{Discussion} \label{sec:discussion}
 

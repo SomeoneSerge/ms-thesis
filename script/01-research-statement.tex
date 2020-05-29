@@ -23,12 +23,49 @@ Sarkar~\cite{sarkar} gives a combinatorial algorithm for approximately
 isometric embedding of a tree. This has inspired a number of works using
 hyperbolic representations for graph-like data, for instance in language models
 
+\subsection*{NPC spaces}
+
+First we need to define what a ``hyperbolic space'' is. First of all, a
+hyperbolic space is a metric space -- i.e. it is a set of points and it has a
+distance function. However its distance function is very special.
+Specifically, a metric space is called hyperbolic if it has constant negative
+curvature. A simpler related concept of non-positive curvature (and, similarly,
+upper-bounded and lower-bounded curvature) can be described in terms of
+compairson triangles, see~\autoref{fig:npcSpaces}. In your metric space,
+consider three points $p, q, r$ in a small neighbourhood.  Connected by
+geodesics, they form a triangle with sides $|pq|$, $|qr|$, and $|rp|$.  One
+could construct a unique Euclidean triangle with same sides. Next, one could
+measure how distance from base point $p$ to the midpoint $\gamma_t$ between $p$
+and $q$ compares to its Euclidean analogue. In hyperbolic space the midpoint
+will appear closer than Euclidean prediction suggests, and on a
+(positively-curved) sphere the opposite inequality is true. One could also
+measure sums of angles -- in hyperbolic space they are strictly less than
+$\pi$, or how volume of a ball grows with its radius -- in hyperbolic space it
+is exponential. An important observation is that spaces of different constant
+curvature cannot be isometric
+
+We treat the notion of ``curvature'' in more detail in
+Appendix~``\nameref{chap:manifolds}'' and specifically~\autoref{sec:curvature}.
+Section ``\nameref{sec:poincareBall}'' in the
+Appendix~``\nameref{chap:hyperbolics}'' introduces a concrete example of a
+hyperbolic space.
+
+\begin{figure}[ht]\center
+    \includegraphics[width=.9\textwidth]{art/npc-comparison-triangle.pdf}
+    \caption{Triangles in non-positively curved spaces versus flat (Euclidean) spaces.
+    The intermediate point \( \gamma_t \) appears closer to \( p \)
+    than a prediction based on Euclidean comparison suggests}
+    \label{fig:npcSpaces}
+\end{figure}
+
 \subsection*{Curvature in metric graphs}
 
 Consider a graph that consists of vertices connected by edges. Such a graph is
+naturally
 a metric space -- its points are the nodes of the graph, and distances are
 measured in smallest number of edges on has to travel to get from one node to
-another.  Now, such distances can behave very wildly, compared to Euclidean
+another.  Such distances can behave very wildly, compared to Euclidean
+distances in
 space. For instance, you could have any number of points that are
 simulataneosuly nearest neighbours of each other (consider the fully-connected
 graph \( K_n \)), whereas in a two-dimensional Euclidean
@@ -40,13 +77,23 @@ between their embeddings.  For instance, we could say that objects are
 arbitrarily chosen threshold).  That's a binary relation, and with
 graph-distances such relation could well be non-transitive. This is easily seen
 in a tree of constant branching factor: the sibling nodes are both ``similar''
-to their common immediate parent, but not to each other. For a ``branchy''
-enough tree, such relationships simply cannot be modeled by distances between
-Euclidean embeddings (of pre-defined dimension).
+to their common immediate parent, but not to each other. Ball volumes and
+sphere areas also grow exponentially, see~\autoref{fig:binaryTreeCircumference}.
+For a ``branchy'' enough tree, such relationships simply cannot be modeled by
+distances between Euclidean embeddings (of pre-defined dimension).
 
-The reason such isometric embeddings into Euclidean space are impossible for
-certain graphs is that these graphs have \emph{curvature} different from that
-of Euclidean space. We shall clarify this statement in later sections.
+This observation -- many trees and graphs have strictly negative curvature --
+implies that one couldn't hope, in general, to isometrically embed them in \(
+\mathbb{R}^n \).
+
+\begin{figure}[ht]\center
+    \includegraphics[width=.9\textwidth]{art/binary-tree-circumference-min.pdf}
+    \caption{A full binary tree has \( 2^n \) nodes on \( n \)'th level, i.e.
+    circumference of a sphere in this metric space grows exponentially with the
+    radius. The volume of a ``ball'' of radius \( n \) centered at root would
+    also be exponential, \( 2^{n+1} - 1 \).}
+    \label{fig:binaryTreeCircumference}
+\end{figure}
 
 \subsection*{Hyperbolic Neural Networks}
 
@@ -69,9 +116,9 @@ decision rule.
 \subsection{Convolutions for ``hyperbolic arrays''} \label{sec:hconv}
 
 \begin{figure}[ht]\center
-\begin{tikzpicture}[scale=0.5, every node/.append style={transform shape}]
+\begin{tikzpicture}
 \node at (0,0) {
-   \input{art/image-convolutions-2019.pdf_tex}
+    \includegraphics[width=.9\textwidth]{art/image-convolutions-2019.pdf}
 };
 \end{tikzpicture}
 \caption{A visualization of ``hyperbolic'' CNN for representation learning}
@@ -192,10 +239,24 @@ exponentials with tangent-space parameterization and adaptive schemes.
 \item Currently, dimension of manifold is not part of the \texttt{Manifold}
 type nor of \texttt{manifold} object, which limits both type-checking and
 inference opportunities.
-\item Finally, geoopt is implemented in Pytorch; a functional style rewrite in
-JAX would allow less \emph{flawed} design and higher order differentiation, as
-well as more consistent language.
+\item Finally, geoopt is implemented in PyTorch. This implies inconvenent
+    bounds to PyTorch's hierarchy of classes, consequent type mismatches and
+        type erasures.  A functional style rewrite in JAX~\cite{jax2018github} would allow less
+        \emph{flawed} design, higher order differentiation, as well as more
+        consistent language (authors of JAX follow Spivak's ``Introduction to
+        Differential Geometry''~\cite{spivak1970comprehensive} and
+        SICP~\cite{abelson1996structure} authors' ``Functional Differential
+        Geometry''~\cite{sussman2013functional}).
 \end{itemize}
 
-\section{Statement and methodology} \label{sec:statement}
+\section{Aims and research statement} \label{sec:statement}
 
+To summarize the above, we believe that in problems involving ``complex
+hierarchies'', performance of any off-the-shelf model can be improved by
+accounting for curvature in the right way. In previous experiments, however, we
+weren't able to figure out what this ``right way'' is. We observe parallels
+with Harmonic analysis on manifolds and with works of Cohen and Welling on
+exploiting symmetries in data. Our goal is to incorporate insights from these
+related methods into our models in order to possibly fix their failures.
+For simplicity, we evaluate our ideas on image classification and pointcloud
+classification.  The results are reported in chapter~\nameref{chap:conclusion}.
