@@ -56,7 +56,7 @@ save space, we cover this subject in more detail (including references) in the
 appendix:~\nameref{appendix:hyperbolics}. \nameref{appendix:manifolds} may be
 a prerequisite for that section.
 
-\subsection*{Hyperbolic Image Embeddings}
+\subsection{Hyperbolic Image Embeddings}
 
 \citet{khrulkov} endeavour to explore ``hidden hierarchies'' of classes of
 objects in image datasets, like \texttt{MiniImageNet}. Specifically, in the
@@ -66,7 +66,30 @@ They then improve off-the-shelf CNNs by appending exponential map layer on top
 of them and use hyperbolic distances between embeddings for the final
 decision rule.
 
-\subsection*{Equivariant CNNs}
+\subsection{Convolutions for ``hyperbolic arrays''} \label{appendix:hconv}
+
+\begin{figure}[ht]\center
+\begin{tikzpicture}[scale=0.5, every node/.append style={transform shape}]
+\node at (0,0) {
+   \input{art/image-convolutions-2019.pdf_tex}
+};
+\end{tikzpicture}
+\caption{A visualization of ``hyperbolic'' CNN for representation learning}
+\end{figure}
+
+In \emph{very} short: we (Max Kochurov, Rasoul Karimov, Maria Taktasheva,
+Cyrill Mazur, Serge Kozlukov) attempt to construct ``convolutional'' layers
+which ``consume'' (multidimensional) arrays of \emph{points on manifolds} (each
+point interpreted as a ``descriptor of a pixel'') -- ``hyperbolic arrays''. Our
+idea is that hyperbolic space is a continuous analogue of a tree and our
+convolutional operation resembles a ``decisison rule for walking down the
+tree'', choosing new directions based on descriptors of neighbour pixels. We
+also generalize Batch Normalization to such setting be appealing to the notion
+of variance and (variance-minimizing) barycenter of a measure in a metric
+space. Results are not satisfying, so we do not discuss the model in detail.
+The general idea however is relevant to the rest of the work.
+
+\subsection{Equivariant CNNs}
 
 A parallel line of geometric method's development relates to the idea of
 equivariance. The most succesful idea in deep learning is arguably that of
@@ -116,13 +139,60 @@ metnioned~\cite{feichtingerFAHA}.
 \citet{eyeRotations,zhou2019glosh,scnnNiessner} are another kind of appearances
 of Harmonic analysis concepts.
 
-\subsection*{Graph convolutions}
+\subsection{Graph convolutions}
 
 One more direction for geometric methods is neural networks operating on graphs.
 We refer the Reader to~\citet{kipf}.
 
 Graph-convolutional methods are also being used for 3D data. The Reader might
 take a look at~\citet{edgeconv} which is particularly relevant to this thesis.
+
+\subsection{Geoopt} \label{sec:geoopt}
+
+This thesis is closely related to the geoopt~\cite{geoopt} package, a joint
+effort of Max Kochurov, Rasoul Karimov, and your narrator.
+Geoopt is python package for Riemannian optimization in \texttt{Pytorch}.
+More background on Riemannian optimization is in the Appendix~\nameref{appendix:manifolds}.
+Starting this development, the authors hadn't much familiarity with
+differential geometry, nor with optimization on manifolds in particular. One of
+the consequences is that we simply couldn't have been aware of what use-cases
+are important, thus in spite of rather hot discussions, the final API has
+significant flaws.
+
+A very short overview of the current design: \texttt{geoopt.Manifold} base
+class describes a methodset expected by \texttt{geoopt.optim} optimizers (which
+are compatible with \texttt{torch.optim}); this methodset includes
+\texttt{retr}action, vector \texttt{transp}ort, \texttt{inner} product, and its
+inverse, \texttt{egrad2rgrad}; specific implementations of \texttt{Manifold}
+can substittue different versions of e.g. retractions, providing different
+levels of precision; points and tangent vectors are always represented by
+coordinates in the (assumed) ambient space. In case of \texttt{PoincareBall},
+this coincides with the natural global chart and its chart-induced basis vector
+fields. Such consistency is only possible because of negative curvature of
+Hyperbolic space. On a sphere one could neither allocate a non-vanishing smooth
+vector field, nor expect geodesics to exist between all points, nor measures to
+have unique barycentres. To be precise, the numbers that Geoopt stores to
+represent a tangent vector are actually coordinates of the push-forward of that
+vector under assumed embedding into ambient vector space. Restricting ourselves
+to such representations wasn't an easy and immediate decision, but at the time
+we couldn't find useful use-cases for introducing e.g. local charts.
+
+``...since brevity is soul of wit, and tediousness the limbs and outward
+flourishes, I will be brief'':
+\begin{itemize}
+\item An important use-case for introducing local charts to geoopt is tiling-based
+parameterizations of Hyperbolic space, as in~\citet{yaSaTilingBased}
+\item As~\citet{trivializations} suggests, we should further our discussion of
+``manifold-versus-methodset for optimization'' interface, as in addition to
+retraction-based optimization, we may be interested in Riemannian and Lie
+exponentials with tangent-space parameterization and adaptive schemes.
+\item Currently, dimension of manifold is not part of the \texttt{Manifold}
+type nor of \texttt{manifold} object, which limits both type-checking and
+inference opportunities.
+\item Finally, geoopt is implemented in Pytorch; a functional style rewrite in
+JAX would allow less \emph{flawed} design and higher order differentiation, as
+well as more consistent language.
+\end{itemize}
 
 \section{Statement and methodology} \label{sec:statement}
 
