@@ -15,10 +15,14 @@
 
 \section{Emergence of hyperbolic deep learning} \label{sec:history}
 
-In 2017-2018~\cite{nickelKiela17} it came to attention of deep learning community, that for a
+In
+2015-2018~\cite{spaceTimeEmbeddings,nickelKiela17,embeddings2018dhingra,wilson2018gradient}
+it came to attention of deep learning community, that for a
 Euclidean space of fixed dimension, \( \mathbb{R}^n \) with usual distance
 function, there are graphs which cannot be isometrically embedded in it, and
 that any graph could be isometrically embedded in a Hyperbolic space.
+\citet{spaceTimeEmbeddings} demonstrate many setups possible in Hyperbolic
+spaces but not flat spaces.
 Sarkar~\cite{sarkar} gives a combinatorial algorithm for approximately
 isometric embedding of a tree. This has inspired a number of works using
 hyperbolic representations for graph-like data, for instance in language models
@@ -111,7 +115,7 @@ revised pre-print they measure \( \delta \)-hyperbolicity of Euclidean distance
 between embeddings of images to reason about ``hierarchicity'' of a dataset.
 They then improve off-the-shelf CNNs by appending exponential map layer on top
 of them and use hyperbolic distances between embeddings for the final
-decision rule.
+decision rule (as in~\citet{snell2017protonet}).
 
 \subsection{Convolutions for ``hyperbolic arrays''} \label{sec:hconv}
 
@@ -135,6 +139,10 @@ also generalize Batch Normalization to such setting be appealing to the notion
 of variance and (variance-minimizing) barycenter of a measure in a metric
 space. Results are not satisfying, so we do not discuss the model in detail.
 The general idea however is relevant to the rest of the work.
+
+Later, \citet{bouza2020mvc} considered a somewhat similar model for
+``convolutions', and \citet{chakraborty2020manifoldnorm} propose a similar
+normalization layer.
 
 \section{Equivariant CNNs} \label{sec:equivariant}
 
