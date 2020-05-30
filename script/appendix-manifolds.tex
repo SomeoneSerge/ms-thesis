@@ -12,7 +12,7 @@ Despite hyperbolic neural networks as promoted by Ganea and B\'ecigneul are
 ultimately built in terms of Ungar's gyrovector formalism coming from Physics,
 and motivating arguments rather refer  to works in hyperbolic geometry, the
 unifying language that does allow to connect the pieces and then formulate
-computational algorithms is that of Differential Geometry. Goal of this appendix
+computational algorithms is that of Differential Geometry. The goal of this appendix
 is to give a feeling of what language we would like to see being used in the field.
 We introduce some of the basic notions -- ones that can be introduced in short time
 without much sacrifice -- and provide the links and directions as to where to search
@@ -24,7 +24,7 @@ In this thesis, we try to follow the language and approach demonstrated in
 Frederic Schuller's lectures~\cite{geometricAnatomy,gravityLight}, as it seems
 consistent enough and at the same time elucidating (and more rigorous than that
 of e.g.~\citep{leeSmooth,leeRiem}). Rather than just reading this appendix, it
-may be worth to acquaint with that course. We allow ourselves small absuses of
+may be worth to acquaint with that course. We allow ourselves small abuses of
 notation, such as using the same partial derivative symbol \( \partial_i \) for
 functions acting on different instances of \( \mathbb{R}^n \).
 
@@ -52,16 +52,16 @@ using Euler's rule:
 \[
 x_{t+1} = x_t - \eta J'(x_t)^\top. \]
 
-Note the transpose of the derivative, it is required because derivative of a
+Note the transpose of the derivative, it is required because a derivative of a
 function \( J: \mathbb{R}^n\to\mathbb{R} \) between vector spaces at a point \(
 x_t \) is a linear functional \[ J'(x_t) \in {^n}\mathbb{R} =
 \mathbb{R}^n\xrightarrow{\sim}\mathbb{R}, \] corresponding to a row-vector, whereas \( x_t \)
 is a column.
 
 There's a number of tools we lack on topological manifolds, that would've
-allowed us to reproduce this algorithm: the notion of a derivative at point and
+allowed us to reproduce this algorithm: the notion of a derivative at a point and
 the transpose -- to compute the descent direction, and the ``subtraction'' --
-to perform a step in computed direction. These require additional structure.
+to perform a step in the computed direction. These require additional structure.
 
 \subsection*{Charts, transition maps, maximal atlas}
 
@@ -74,7 +74,7 @@ are \emph{smoothly compatible}, if either \(U\cap V = \varnothing\)
 or transition map is a \emph{diffeomorphism} (in Euclidean sense):
 \(y\circ x^{-1}: x(U\cap V)\subset\mathbb{R}^n
 \to y(U\cap V)\subset\mathbb{R}^n.\)
-Now, to endow \(M\) with a \emph{smooth structure}, means to provide
+Now, to endow \(M\) with a \emph{smooth structure} means to provide
 a \emph{maximal atlas} \(A\) on \(M\) -- a collection of \emph{smoothly-compatible}
 charts, whose domains cover entire \(M\), and such that
 this collection cannot be extended with a new chart in a smoothly-compatible way.
@@ -94,7 +94,7 @@ for every \((U, x)\in A_M$, $(V, y) \in A_N.\)
 We're now ready to define what a ``direction'' on an abstract smooth manifold
 is. The way we describe directions on a manifold is by how (scalar) test
 functions change along them, locally.
-Given a point \( p\in M \), consider a smooth curve passing through at
+Given a point \( p\in M \), consider a smooth curve passing through \( p \) at
 time (without loss of generality) \( 0 \). That means, consider a smooth map \(
 \gamma:I\subset\mathbb{R} \to M \) of an open interval of real line to \( M \),
 such that \( 0\in I \) and \( \gamma(0) = p \). Such a curve corresponds to a
@@ -138,9 +138,9 @@ which suggests to convert vectors into functionals by filling in one slot
 in the inner product, \( x\mapsto \langle x,~\cdot\rangle \), and ascertains
 that any (Euclidean) covector is uniquely realized in such form. Specifically,
 in \( \mathbb{R}^n \) with canonical inner product, this conversion amounts
-to transposing column-vectors to row-vectors and vice-versa.
+to transposing column-vectors into row-vectors and vice-versa.
 
-\subsection*{Metric manifolds}
+\subsection*{Metric manifolds} \label{sec:metricMfds}
 
 The missing piece of structure is the assignments of inner products on tangent
 spaces. A metric manifold is a smooth manifold with \emph{smooth} assignments
@@ -179,16 +179,16 @@ The only tool we're missing now is the ``addition'' operation that, given a
 ``direction'', would allow to ``push'' a point along it in order to adjust
 parameters. 
 
-\subsection*{Chart-induced bases}
+\subsection*{Chart-induced bases} \label{sec:chartInducedBasis}
 
 It is a good moment to take a pause and think about representing the discussed
 so-far geometric objects with numbers. While this is not the final answer that
-would allows us implement a computer program, we should recall that locally a
+would allow us implement a computer program, we should recall that locally a
 point on a manifold is described by its coordinates in a chart, \( (U, x) \).
 To represent tangent vectors and metrics, which restricted to a point are
 elements of vector spaces, we'd need to choose basis vectors. Turns out,
 a chart induces a specific preferred basis in \( \mathcal{T}_pM \),
-which in turns induces the dual basis on \( \mathcal{T}^*_pM \) and so on.
+which in turn induces the dual basis on \( \mathcal{T}^*_pM \) and so on.
 
 The basis in \( \mathcal{T}_pM \) induced by a chart \( (U, x) \) consists of
 push-forwards of partial derivatives \( \partial_i \) on \(\mathbb{R}^n\) under
@@ -206,8 +206,8 @@ Given this basis, the local metric can be described by coefficients
 Finally, one should note that this induces coordinates on the tangent bundle \(
 \mathcal{T}M \), as any \( X_{p,\gamma} \in \mathcal{T}M \) can be described
 by the point \( (x_1(p), \ldots, x_n(p), X_1(p), \ldots, X_n(p)) \),
-where \( X_i \)'s are coefficients in decomposition of \( X \) with respect
-to basis of \( \partial_{x_j} \)'s. One can verify that this indeed generates
+where \( X_i \)'s are coefficients in the decomposition of \( X \) with respect
+to the basis of \( \partial_{x_j} \)'s. One can verify that this indeed generates
 a valid atlas and that \( \mathcal{T}M \) is a \(2n\)-dimensional manifold.
 
 \subsection*{Covariant derivative, geodesic equation, exponential map, parallelism}
@@ -219,7 +219,7 @@ second derivative, i.e. how do we differentiate vector fields?
 
 The very short story is this: we already know that tangent vectors correspond
 to smooth curves, although in a non-unique way. However, once we have an
-additional structure of Riemannian metric and thus learn to measure lengths, we
+additional structure of the Riemannian metric and thus learn to measure lengths, we
 could ask ``how many of these representative curves are length-minimizing, at
 least locally?''. The theory of ordinary differential equations suggests that
 (in a small neighbourhood) there's just one. Further, it even turns out under
@@ -229,7 +229,7 @@ the evolution function of this initial value problem, which takes a tangent
 vector of initial velocity and returns the point at which one would arrive
 following the integral curve for unit time. There's a number of irregularities
 to take care of, but for the rest of the chapter we can think think
-that exponential map is defined on entire tangent bundle (this is perfectly
+that exponential map is defined on the entire tangent bundle (this is perfectly
 valid for Hyperbolic spaces, but positive curvature makes things more involved)
 \( \exp: TM \to M \). We'll also denote \( \exp_p: \mathcal{T}_pM \to M \)
 the exponential map from a fixed point.
@@ -239,8 +239,8 @@ differentiation), and the induced notion of parallel transport of vectors,
 however we just lack time and refer the Reader to the Frederic Schuller's
 lectures and Lee's manuscripts.
 
-Finally, it would be really nice to lay out Euler-Lagrance equations in a way
-that would type-check successfully -- again, an exercise for future.
+Finally, it would be really nice to lay out Euler-Lagrange equations in a way
+that would type-check successfully -- again, an exercise for the future.
 
 \subsection*{Riemannian gradient descent}
 
@@ -271,7 +271,7 @@ Pierre-Antoine Absil.
 
 Early works on hyperbolic neural networks (with parameters lying on manifolds)
 mostly rely on Riemannian optimization. However, it has been empirically noted
-for long time that in experiments the naive tangent-space parameterization --
+for a long time that in experiments the naive tangent-space parameterization --
 with parameters stored as coordinates of tangent vectors -- in conjunction with
 standard adaptive gradient-based optimization algorithms in fact systematically
 outperforms Riemannian optimization. This may be due to numerical instability
@@ -281,7 +281,7 @@ symmetric hyperbolic space -- we do not know yet. However, alternatives have
 been considered. Thus \citet{trivializations} does a good job at making sense,
 mathematically, of optimization based on arbitrary parameterizations of a
 surface by Euclidean vectors, with in-depth analysis of the three arguably most
-improtant examples of such parameterizations: the Riemannian exponential map,
+important examples of such parameterizations: the Riemannian exponential map,
 the Lie exponential, and retractions.
 
 \section*{Gradient flow}
@@ -294,7 +294,7 @@ be~\citet{ambrosioGradientFlows,ambrosioOTSummerSchool}.
 
 \citet{baryPennec} discuss generalizations of Principal Component Analysis to
 Riemannian manifolds and specifically discuss optimization on flags of linear
-subspaces. This work is important to acquit with at least because of a useful
+subspaces. This work is important to acquaint with at least because of a useful
 language that it develops.
 \section{Curvature} \label{sec:curvature}
 
@@ -324,7 +324,7 @@ Here should go an inspiring story about triangles and quadruples, but the time
 doesn't allow us to include it.
 For a motivating introduction, the Reader could refer to the most beautiful
 talk of~\citet{villaniTriangles} and then his manuscript~\cite{villaniOldNew}.
-\citet{burago} and \citet{alexander} give an introductino to metric geometry.
+\citet{burago} and \citet{alexander} give an introduction to metric geometry.
 Less related are but inspiring are the seminal work of~\citet{sturm} on Wasserstein
 distances between probability measures on metric spaces with curvature bounded
 below, and~\citet{le2017existence}.
@@ -339,7 +339,7 @@ symmetric) metric space as the number \( K(p) \) which appears in
 \[ \operatorname{Vol}(B(p, r)) = \pi r^2 - \frac{\pi}{12}K(p) r^4 + o(r^4). \]
 
 Ricci curvature is the quadratic form \( \operatorname{Ricci} \) that measures
-average of the sectional curvature \( \varkappa \):
+the average of the sectional curvature \( \varkappa \):
 \[ \operatorname{Ricci}(X) = \sum_{i=1}^n \varkappa(X, \partial_{x_i}). \]
 
 Again, there isn't time and place to discuss this subject in depth, so the

@@ -37,10 +37,11 @@ curvature. A simpler related concept of non-positive curvature (and, similarly,
 upper-bounded and lower-bounded curvature) can be described in terms of
 compairson triangles, see~\autoref{fig:npcSpaces}. In your metric space,
 consider three points $p, q, r$ in a small neighbourhood.  Connected by
-geodesics, they form a triangle with sides $|pq|$, $|qr|$, and $|rp|$.  One
-could construct a unique Euclidean triangle with same sides. Next, one could
-measure how distance from base point $p$ to the midpoint $\gamma_t$ between $p$
-and $q$ compares to its Euclidean analogue. In hyperbolic space the midpoint
+geodesics, they form a triangle with sides $|pq|$, $|qr|$, and $|rp|$ ($|xy|$
+for distance between $x$ and $y$).  One could construct a unique Euclidean
+triangle with same sides. Next, one could
+measure how distance from base point $p$ to the midpoint $\gamma_t$ between $q$
+and $r$ compares to its Euclidean counterpart. In hyperbolic space the midpoint
 will appear closer than Euclidean prediction suggests, and on a
 (positively-curved) sphere the opposite inequality is true. One could also
 measure sums of angles -- in hyperbolic space they are strictly less than
@@ -68,8 +69,8 @@ Consider a graph that consists of vertices connected by edges. Such a graph is
 naturally
 a metric space -- its points are the nodes of the graph, and distances are
 measured in smallest number of edges on has to travel to get from one node to
-another.  Such distances can behave very wildly, compared to Euclidean
-distances in
+another.  Such distances can behave very wildly, compared to
+distances in Euclidean
 space. For instance, you could have any number of points that are
 simulataneosuly nearest neighbours of each other (consider the fully-connected
 graph \( K_n \)), whereas in a two-dimensional Euclidean
@@ -79,15 +80,17 @@ the notion of ``similarity'' of objects (images or words) in terms of distance
 between their embeddings.  For instance, we could say that objects are
 ``similar'' if the ``distance'' between them is no more than \( 1 \) (an
 arbitrarily chosen threshold).  That's a binary relation, and with
-graph-distances such relation could well be non-transitive. This is easily seen
+graph-distances such relation could well be non-transitive (``$A$ similar to
+$B$ and $B$ similar to $C$ does not entail $A$ similar to $C$''). This is easily
+seen
 in a tree of constant branching factor: the sibling nodes are both ``similar''
 to their common immediate parent, but not to each other. Ball volumes and
 sphere areas also grow exponentially, see~\autoref{fig:binaryTreeCircumference}.
 For a ``branchy'' enough tree, such relationships simply cannot be modeled by
 distances between Euclidean embeddings (of pre-defined dimension).
 
-This observation -- many trees and graphs have strictly negative curvature --
-implies that one couldn't hope, in general, to isometrically embed them in \(
+This observation -- that many trees and graphs have strictly negative curvature --
+implies one couldn't even hope, in general, to isometrically embed a graph in \(
 \mathbb{R}^n \).
 
 \begin{figure}[ht]\center
@@ -102,10 +105,12 @@ implies that one couldn't hope, in general, to isometrically embed them in \(
 \subsection*{Hyperbolic Neural Networks}
 
 \citet{ganeaHNNs} introduce hyperbolic neural layers which operate on
-hyperbolic embeddings and can be arbitrarily stacked into deep networks.  To
-save space, we cover this subject in more detail (including references) in the
-appendix~\nameref{chap:hyperbolics}. \nameref{chap:manifolds} may be
-a prerequisite for that section.
+hyperbolic embeddings and can be arbitrarily stacked into deep networks.
+For example, they construct a Gated Recurrent Unit with hyperbolic hidden
+state.
+To save space, we cover this subject in more detail (including references) in
+the appendix~\nameref{chap:hyperbolics}. \nameref{chap:manifolds} may be a
+prerequisite for that section.
 
 \subsection*{Hyperbolic Image Embeddings}
 
@@ -135,18 +140,24 @@ point interpreted as a ``descriptor of a pixel'') -- ``hyperbolic arrays''. Our
 idea is that hyperbolic space is a continuous analogue of a tree and our
 convolutional operation resembles a ``decisison rule for walking down the
 tree'', choosing new directions based on descriptors of neighbour pixels. We
-also generalize Batch Normalization to such setting be appealing to the notion
+also generalize Batch Normalization to such setting by appealing to the notion
 of variance and (variance-minimizing) barycenter of a measure in a metric
-space. Results are not satisfying, so we do not discuss the model in detail.
-The general idea however is relevant to the rest of the work.
+space. Experiments showed these models to quickly overfit with very small number
+of parameters (\( 100 \)K parameters are enough to overfit on CIFAR10),
+however we couldn't find a way to regularise the model to improve generalization
+ability. For this reason, we omit detailed description of these results here.
+The general idea, however, is relevant to the rest of the work. A number
+of questions have been left open: whether and which non-linearities are needed
+in hyperbolic networks, how to transport filters between points, how to even
+justify the framework?
 
 Later, \citet{bouza2020mvc} considered a somewhat similar model for
-``convolutions', and \citet{chakraborty2020manifoldnorm} propose a similar
+``convolutions', and \citet{chakraborty2020manifoldnorm} proposed a similar
 normalization layer.
 
 \section{Equivariant CNNs} \label{sec:equivariant}
 
-A parallel line of geometric method's development relates to the idea of
+A parallel line of geometric methods' development relates to the idea of
 equivariance. The most succesful idea in deep learning is arguably that of
 convolutional networks. Convolutional neural networks (CNNs) convolve
 input signals with a number of learned filters, each filter capturing
@@ -155,7 +166,7 @@ its own pattern. To be specific, a convolution of a function \( f: \mathbb{R}^n
 function~\cite{feichtingerFAHA}
 \[ f*h = x \mapsto \int_{\mathbb{R}^n} f(y + 0) h(x-y)
 \operatorname{d\lambda} y. \]
-In case of discrete signals such as images this
+In case of discrete signals, such as images, this
 integral reduces to a finite sum over pixels. An important thing to notice
 about this operation, is that it commutes with translations:
 \[ (T_a f) * h = f * (T_{-a} h) = T_a (f * h), \]
@@ -207,7 +218,7 @@ take a look at~\citet{edgeconv} which is particularly relevant to this thesis.
 
 This thesis is closely related to the geoopt~\cite{geoopt} package, a joint
 effort of Max Kochurov, Rasoul Karimov, and your narrator.
-Geoopt is python package for Riemannian optimization in \texttt{Pytorch}.
+Geoopt is Python package for Riemannian optimization in \texttt{PyTorch}.
 More background on Riemannian optimization is in the Appendix~\nameref{chap:manifolds}.
 Starting this development, the authors hadn't much familiarity with
 differential geometry, nor with optimization on manifolds in particular. One of
@@ -219,15 +230,22 @@ A very short overview of the current design: \texttt{geoopt.Manifold} base
 class describes a methodset expected by \texttt{geoopt.optim} optimizers (which
 are compatible with \texttt{torch.optim}); this methodset includes
 \texttt{retr}action, vector \texttt{transp}ort, \texttt{inner} product, and its
-inverse, \texttt{egrad2rgrad}; specific implementations of \texttt{Manifold}
-can substittue different versions of e.g. retractions, providing different
+inverse, \texttt{egrad2rgrad} (see \nameref{sec:metricMfds} on how inner
+product is related to conversion between ``Euclidean and Riemannian
+gradients''); specific implementations of \texttt{Manifold}
+can substitute different versions of e.g. retractions, providing different
 levels of precision; points and tangent vectors are always represented by
-coordinates in the (assumed) ambient space. In case of \texttt{PoincareBall},
+coordinates in the (assumed) ambient space. In case of \texttt{PoincareBall}
+(\autoref{sec:poincareBall}),
 this coincides with the natural global chart and its chart-induced basis vector
-fields. Such consistency is only possible because of negative curvature of
-Hyperbolic space. On a sphere one could neither allocate a non-vanishing smooth
-vector field, nor expect geodesics to exist between all points, nor measures to
-have unique barycentres. To be precise, the numbers that Geoopt stores to
+fields (defined in appendices, \nameref{sec:chartInducedBasis}). Such
+consistency is only possible because of negative curvature of
+Hyperbolic space and conformality of Poincar\'e Ball.
+On a sphere one could neither allocate a non-vanishing smooth
+vector field, nor expect unique geodesics to exist between all points, nor measures to
+have unique barycentres.
+
+To be precise, the numbers that Geoopt stores to
 represent a tangent vector are actually coordinates of the push-forward of that
 vector under assumed embedding into ambient vector space. Restricting ourselves
 to such representations wasn't an easy and immediate decision, but at the time
@@ -241,13 +259,13 @@ flourishes, I will be brief'':
 \item An important use-case for introducing local charts to geoopt is tiling-based
 parameterizations of Hyperbolic space, as in~\citet{yaSaTilingBased}
 \item As~\citet{trivializations} suggests, we should further our discussion of
-``manifold-versus-methodset for optimization'' interface, as in addition to
+``manifold versus methodset-for-optimization'' interface, as in addition to
 retraction-based optimization, we may be interested in Riemannian and Lie
 exponentials with tangent-space parameterization and adaptive schemes.
 \item Currently, dimension of manifold is not part of the \texttt{Manifold}
 type nor of \texttt{manifold} object, which limits both type-checking and
 inference opportunities.
-\item Finally, geoopt is implemented in PyTorch. This implies inconvenent
+\item Finally, geoopt is implemented in PyTorch. This implies inconvenient
     bounds to PyTorch's hierarchy of classes, consequent type mismatches and
         type erasures.  A functional style rewrite in JAX~\cite{jax2018github} would allow less
         \emph{flawed} design, higher order differentiation, as well as more
@@ -260,7 +278,7 @@ inference opportunities.
 \section{Aims and research statement} \label{sec:statement}
 
 To summarize the above, we believe that in problems involving ``complex
-hierarchies'', performance of any off-the-shelf model can be improved by
+hierarchies'', the performance of any off-the-shelf model can be improved by
 accounting for curvature in the right way. In previous experiments, however, we
 weren't able to figure out what this ``right way'' is. We observe parallels
 with Harmonic analysis on manifolds and with works of Cohen and Welling on

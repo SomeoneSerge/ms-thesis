@@ -15,7 +15,7 @@ solutions to a Boltzmann-type integral equation.
 The classic approach, taken by~\cite{kajiya1986rendering},
 is to use Monte-Carlo methods, which gives rise to variety of raytracing algorithms.
 Another common approach is the finite element method, for an overview of which
-one could probabily refer to~\cite{lehtinen2004foundations}. Less common in
+one could probably refer to~\cite{lehtinen2004foundations}. Less common in
 graphics community, but possibly still interesting alternative is also the boundary element
 method~\cite{zhang2013fast}.
 
@@ -36,9 +36,9 @@ Also of interest is Tzu Mao Li's thesis~\cite{tzuMaoThesis}.
 reparameterize the integral so that discontinuities disappear.
 
 As inverse graphics is an extremely ill-posed problem with no single solution
-that we could arrive at with straightforward gradient descent, we means of
+that we could arrive at with straightforward gradient descent, we need means of
 incorporating our prior knowledge of the real world into the models to recover
-solutions that do actually make sense. Specifically, we may want to pose
+solutions that do ``make sense''. Specifically, we may want to pose
 optimization problem that doesn't actually compare the physically-based render
 of the scene against the reference: because e.g. occlusions could trap
 reconstructed model in a local minimum. There are different approaches to
@@ -81,15 +81,15 @@ refractions and reflections, accumulating (or rather, losing) the view
 direction-dependent color along the way. A colleague of mine, Alexey Boyko has
 well described this as ``colored multipole fog''. The required underlying
 datastructure then is a differentiable parameterized black-box function that
-takes in a point and direction, and spits out absorbtion coefficient plus color
--- a task for a neural network!
+takes in a point and direction, and spits out an absorbtion coefficient plus
+color -- a task for a neural network!
 There's a number of ways one could proceed with NeRF. One could seek to improve
 its performance, e.g. by using a different blackbox, like a tensor train.  On
 the other hand, just as TSDF-Fusion develops into DynamicFusion, one could try
 to add a temporal dimension to NeRF (must be a decent exercise in Neurobayesian
 methods).
 
-The discussed methods in fact rely on more low-level machinery. For instance,
+The discussed methods rely on more low-level machinery. For instance,
 structure from motion, or efficient template fitting, all rely on extraction of
 points of interest~\cite{r2d2} from different images of the same surface, and
 the following synchronization of correspondences~\cite{birdalCorrespondences}.
@@ -115,11 +115,11 @@ raytracing, that starts from a scratch and describes the concepts in simplest
 terms possible, without the burden of industry's legacy terminology and
 pre-made design choices. A good place to start and see the subjects plain
 without the overwhelming noisy background.
-\item The excellent PBR-Book of \citet{pbrBook} is a a literate
-programming-style book abot physically-based rendering techniques with industry
+\item The excellent PBR-Book of \citet{pbrBook} is a literate
+programming-style book about physically-based rendering techniques with industry
 standards-compliant implementations in C++ and gives sense as to what sort of
-challenges and decisions one has to face when designing software for compute
-graphics. Specifically, when deciding about camera models or the form of
+challenges and decisions one has to face when designing graphics software.
+Specifically, when deciding about camera models or the form of
 generic BRDF -- this book provides some background about what people out there
 are already using. This is apart from being a really great and accessible book
 about its subject. Especially note ``further reading'' page~\cite{pbrBookReading}.
