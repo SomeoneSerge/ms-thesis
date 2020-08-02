@@ -57,7 +57,8 @@
 \glsenablehyper
 \makeglossaries
 %\usepackage{comment}
-\usepackage{subcaption}
+%\usepackage{subcaption}
+\usepackage{subfigure}
 \usepackage{tabularx, lscape, rotating}
 \usepackage[most]{tcolorbox}
 \newtcolorbox{myframe}[1][]{
@@ -78,8 +79,14 @@
 %\setlength{\afterepigraphskip}{.25\baselineskip}
 \renewcommand{\textflush}{flushepinormal}
 
+
+
+\newlength\Colsep
+\setlength\Colsep{10pt}
+
 \usepackage[toc,page]{appendix}
 
 
 \addbibresource{references.bib}
+
 

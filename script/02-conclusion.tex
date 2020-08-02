@@ -28,11 +28,31 @@ with logarithmic map \( \log_x \) from some point \( x \) in the window, thus
 producing a decision rule based only on ``relative directions'' towards neighbours
 and independent of ``which subtree we're in''
 
-\begin{figure}[ht]\center
-\includegraphics[width=.9\textwidth]{art/neighbours.pdf}
-\caption{Relative directions to neighbour embeddings. To an embedding \( y \)
-there corresponds a tangent vector \( Y = \log_x y \), visualized here as a
-geodesic line segment in Poincar\'e ball.}
+\begin{figure}
+    \noindent\begin{minipage}{\textwidth}
+        \begin{minipage}[c][8cm][c]{\dimexpr0.5\textwidth-0.5\Colsep\relax}
+            \texttt{H-Conv 0.1}:
+
+            \includegraphics[width=.85\linewidth]{art/absolute-locations.pdf}
+            \[ x' = \exp_0\left(
+                \operatorname{Conv2D}\left(
+                    \log_0 Y
+                    \right)\right) \]
+        \end{minipage}\hfill
+        \begin{minipage}[c][8cm][c]{\dimexpr0.5\textwidth-0.5\Colsep\relax}
+            \texttt{H-Conv 0.2}:
+
+            \includegraphics[width=.85\linewidth]{art/relative-locations.pdf}
+            \[ x' = \exp_x\left(
+                \operatorname{Conv2D}\left(
+                    \log_x Y\right)\right) \]
+        \end{minipage}%
+    \end{minipage}
+    \caption{On the left: the original \texttt{H-Conv}.
+    Right: relative directions to neighbour embeddings in the modified
+    \texttt{H-Conv}. To an embedding \( y \) there corresponds a tangent vector
+    \( Y = \log_x y \), visualized here as a geodesic line segment in
+    Poincar\'e ball.}
 \end{figure}
 
 \section{Hyperbolic EdgeConv} \label{sec:hedgeconv}

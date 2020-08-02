@@ -65,6 +65,7 @@ hyperbolic space.
 
 \subsection*{Curvature in metric graphs}
 
+
 Consider a graph that consists of vertices connected by edges. Such a graph is
 naturally
 a metric space -- its points are the nodes of the graph, and distances are
@@ -73,7 +74,7 @@ another.  Such distances can behave very wildly, compared to
 distances in Euclidean
 space. For instance, you could have any number of points that are
 simulataneosuly nearest neighbours of each other (consider the fully-connected
-graph \( K_n \)), whereas in a two-dimensional Euclidean
+graph \( K_n \), \autoref{fig:clique}), whereas in a two-dimensional Euclidean
 plane~\cite{howManyNeighbours} the best you can do is three points allocated in
 an equilateral triangle. This has immediate implications if you were to define
 the notion of ``similarity'' of objects (images or words) in terms of distance
@@ -93,13 +94,27 @@ This observation -- that many trees and graphs have strictly negative curvature 
 implies one couldn't even hope, in general, to isometrically embed a graph in \(
 \mathbb{R}^n \).
 
-\begin{figure}[ht]\center
-    \includegraphics[width=.9\textwidth]{art/binary-tree-circumference-min.pdf}
+\begin{figure}[ht]
+    \centering
+    \hfill
+    \subfigure[A full binary tree.
+    ]{
+        \includegraphics[width=.6\linewidth]{art/binary-tree-circumference-min.pdf}
+        \label{fig:binaryTreeCircumference}
+    }
+    \hfill
+    \subfigure[An \( n \)-clique.
+    ]{\includegraphics[width=.3\linewidth]{art/h-clique.pdf}
+    \label{fig:clique}
+    }
+    \hfill
     \caption{A full binary tree has \( 2^n \) nodes on \( n \)'th level, i.e.
     circumference of a sphere in this metric space grows exponentially with the
     radius. The volume of a ``ball'' of radius \( n \) centered at root would
-    also be exponential, \( 2^{n+1} - 1 \).}
-    \label{fig:binaryTreeCircumference}
+    also be exponential, \( 2^{n+1} - 1 \).
+    A clique is an example of metric space where \( n \) points
+    can be mutual nearest neighbours.
+    }
 \end{figure}
 
 \subsection*{Hyperbolic Neural Networks}

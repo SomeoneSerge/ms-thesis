@@ -246,6 +246,20 @@ that would type-check successfully -- again, an exercise for the future.
 
 \subsection*{Riemannian gradient descent}
 
+
+\begin{figure}[h]\centering
+\includegraphics[width=.9\linewidth]{art/rgd-update.pdf}
+\caption{A gradient descent step on the Poincar\'e disk.
+Contour lines visualize the objective function; \( p_t \) is the current estimate;
+    \( -\mathcal{J}'(p_t)^\flat \) is the descent direction, visualized as a geodesic curve;
+\( p_{t+1} \) is the final point of that curve and the new estimate;
+\( \partial_{x_1},~\partial_{x_2} \) are chart-induced basis vectors in the
+    space of directions at \( p_t \);
+stroked line visualizes the (downscaled) ``Euclidean'' gradient.
+}
+\label{fig:rgdStep}
+\end{figure}
+
 With all the tools introduced, we finally can describe the gradient descent
 algorithm for an objective function \( J: M \to \mathbb{R} \) on an abstract
 Riemannian manifold \( M \).
@@ -321,6 +335,18 @@ and \emph{curvature bounds} which I believe we (those interested in hyperbolic
 deep learning) should master.
 
 \subsection*{Synthetic: Curvature bounds}
+
+\begin{figure}\centering
+    \includegraphics[width=.85\linewidth]{art/triangle-comparison.pdf}
+    \caption{NPC Inequality: \( |\bar{p}\bar{\gamma}_t| > |p\gamma_t| \).
+    Here
+        \( M \) is a metric space;
+        \( p, q, r \in M \) form a geodesic triangle;
+        \( \bar{p}, \bar{q}, \bar{r} \in \mathbb{R}^2 \) is a Euclidean comparison triangle;
+        \( \gamma_t \in M \) is a point on the constant-speed shortest path between \( q, r \);
+        \( \bar{\gamma}_t \) is the corresponding comparison point.
+    }
+\end{figure}
 
 Here should go an inspiring story about triangles and quadruples, but the time
 doesn't allow us to include it.
